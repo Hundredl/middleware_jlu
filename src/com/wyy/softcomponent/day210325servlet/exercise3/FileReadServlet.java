@@ -1,6 +1,5 @@
-package com.wyy.servlet.day210325.exercise3;
+package com.wyy.softcomponent.day210325servlet.exercise3;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

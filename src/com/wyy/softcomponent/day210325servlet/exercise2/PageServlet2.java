@@ -1,4 +1,4 @@
-package com.wyy.servlet.day210325.exercise2;
+package com.wyy.softcomponent.day210325servlet.exercise2;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet("/page2")
 public class PageServlet2 extends HttpServlet {
