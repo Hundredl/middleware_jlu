@@ -1,0 +1,55 @@
+version: "2"
+
+services:
+  app:
+    # Retrive pre-built image from DockerHub
+#    image: kaaass/wildfly-mysql:java-7-jboss-as-7.1.1.Final-mysql-5.7
+    # Or build locally by removing comments below
+    build:
+      context: .
+      network: host
+      args:
+        WILDFLY_VER: ${WILDFLY_VERSION}
+        MYSQL_CONNECTOR_VERSION: ${MYSQL_CONNECTOR_VERSION}
+    environment:
+      - WILDFLY_DEBUG=${WILDFLY_DEBUG}
+      - WILDFLY_USER=${WILDFLY_ADMIN_USER}
+      - WILDFLY_PASS=${WILDFLY_ADMIN_PASS}
+      - DB_NAME=${MYSQL_DATABASE}
+      - DB_USER=${MYSQL_USER}
+      - DB_PASS=${MYSQL_PASSWORD}
+      - DB_URI=db:3306
+      - LANG=en_US.UTF-8
+      - LANGUAGE=en_US:UTF-8
+      - LC_ALL=en_US.UTF-8
+    depends_on:
+      - db
+    volumes:
+      - ${DEPLOYMENT_PATH}:/opt/jboss/jbossas/standalone/deployments/:rw
+      - ${INIT_PATH}:/opt/jboss/jbossas/customization/init.d
+    ports:
+      - "8080:8080" # application
+      - "9990:9990" # admin console
+      - "8787:8787" # java debug
+      - "4447:4447" # remote jndi
+
+  db:
+    image: "mysql:${MYSQL_VERSION}"
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ${DATABASE_INIT_PATH}:/docker-entrypoint-initdb.d/ # init database
+      - ${DATABASE_DATA_PATH}:/var/lib/mysql/              # data storage
+    ports:
+      - "13306:3306"
+
+volumes:
+  db-data:
+    driver: local
+      
+networks:
+  default:
+    driver: bridge
