@@ -1,4 +1,4 @@
-package jluee.jpa;
+package jluee.jpa.student;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

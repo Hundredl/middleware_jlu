@@ -1,28 +1,17 @@
-package jluee.jpa;
+package jluee.jpa.stu;
 
 import javax.persistence.*;
 
 @Entity
-public class Student {
+public class Stu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String gender;
     private String major;
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "address_id")
-    private Address address;
 
-    public Student() {
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
+    public Stu() {
     }
 
     public int getId() {
