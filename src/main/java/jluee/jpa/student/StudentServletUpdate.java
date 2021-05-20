@@ -16,17 +16,24 @@ public class StudentServletUpdate extends HttpServlet {
     private final IStudentService studentService = new StudentService();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
+        String gender = request.getParameter("gender");
+        String major = request.getParameter("major");
+        String addr = request.getParameter("address");
+
         Student p = new Student();
-        p.setGender("female");
-        p.setName("testUpdate");
-        p.setMajor("updating");
+        p.setName(name);
+        p.setMajor(major);
+        p.setGender(gender);
+
         Address address = new Address();
-        address.setDetail("test update address");
+        address.setDetail(addr);
         p.setAddress(address);
-        studentService.updateStudent(3, p);
+        studentService.updateStudent(Integer.parseInt(id), p);
     }
 }

@@ -14,11 +14,13 @@ public class StudentServletDel extends HttpServlet {
     private final IStudentService studentService = new StudentService();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        studentService.deleteStudent(4);
+        String id = request.getParameter("id");
+
+        studentService.deleteStudent(Integer.parseInt(id));
 
     }
 }

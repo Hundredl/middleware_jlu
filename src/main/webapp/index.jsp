@@ -8,25 +8,45 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>绑定</title>
+    <title>jpa</title>
 </head>
 <body>
 <form name="f" action='bind' method="post" id="userform">
     <div>
-        <label>绑定名字:</label>
+        <label>id:</label>
         <label>
-            <input class="theinput" type="text" name="binding_name" required/>
+            <input class="theinput" type="text" name="id"/>
         </label>
-        <label>绑定值:</label>
+        <label>姓名:</label>
         <label>
-            <input class="theinput" type="text" name="binding_value"/>
+            <input class="theinput" type="text" name="name"/>
         </label>
+        <label>性别:</label>
+        <label>
+            <input class="theinput" type="text" name="gender"/>
+        </label>
+        <label>专业:</label>
+        <label>
+            <input class="theinput" type="text" name="major"/>
+        </label>
+        <label>地址:</label>
+        <label>
+            <input class="theinput" type="text" name="address"/>
+        </label>
+
     </div>
     <br>
-    <input class="submit" type="submit" value="绑定" onclick="document.f.action='bind';document.f.submit();"/>
-    <input class="submit" type="submit" value="查询" onclick="document.f.action='search';document.f.submit();"/>
-    <input class="submit" type="submit" value="重新绑定" onclick="document.f.action='rebind';document.f.submit();"/>
-    <input class="submit" type="submit" value="取消绑定" onclick="document.f.action='cancel';document.f.submit();"/>
+    <input class="submit" type="submit" value="单实体插入" onclick="document.f.action='stu/add';document.f.submit();"/>
+    <input class="submit" type="submit" value="单实体查询" onclick="document.f.action='stu';document.f.submit();"/>
+    <input class="submit" type="submit" value="单实体删除" onclick="document.f.action='stu/del';document.f.submit();"/>
+    <input class="submit" type="submit" value="单实体更新" onclick="document.f.action='stu/update';document.f.submit();"/>
+    <br>
+    <input class="submit" type="submit" value="一对一插入" onclick="document.f.action='student/add';document.f.submit();"/>
+    <input class="submit" type="submit" value="一对一查询" onclick="document.f.action='student';document.f.submit();"/>
+    <input class="submit" type="submit" value="一对一删除" onclick="document.f.action='student/del';document.f.submit();"/>
+    <input class="submit" type="submit" value="一对一更新" onclick="document.f.action='student/update';document.f.submit();"/>
+    <br>
+
 
 </form>
 </body>

@@ -14,7 +14,7 @@ public class StudentServlet extends HttpServlet {
     private final IStudentService studentService = new StudentService();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -22,7 +22,7 @@ public class StudentServlet extends HttpServlet {
         List<Student> result = studentService.findAllStudents();
 
         out.println("Id\tname\tmajor\taddress");
-//        out.println("<br>");
+        out.println("<br>");
         for (Student c: result) {
             out.println(c.getId() + "\t" + c.getName() + "\t" + c.getMajor() + "\t" + c.getAddress().getDetail());
             out.println("<br>");

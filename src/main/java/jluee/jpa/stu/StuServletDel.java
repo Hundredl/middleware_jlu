@@ -11,8 +11,10 @@ public class StuServletDel extends HttpServlet {
     private StuService stuService = new StuService();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
-        stuService.deleteStudent(4);
+
+        String id = request.getParameter("id");
+        stuService.deleteStudent(Integer.parseInt(id));
     }
 }

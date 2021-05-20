@@ -16,18 +16,23 @@ public class StudentServletAdd extends HttpServlet {
     private final IStudentService studentService = new StudentService();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
+        String name = request.getParameter("name");
+        String gender = request.getParameter("gender");
+        String major = request.getParameter("major");
+        String addr = request.getParameter("address");
+
         Student p = new Student();
-        p.setName("testAdd");
-        p.setMajor("add");
-        p.setGender("male");
+        p.setName(name);
+        p.setMajor(major);
+        p.setGender(gender);
 
         Address address = new Address();
-        address.setDetail("test add address");
+        address.setDetail(addr);
         p.setAddress(address);
 
         studentService.addStudent(p);
