@@ -17,9 +17,12 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 dependencies {
+//    compile(files('lib/eclipselink/jlib/jpa/javax.persistence_2.1.0.v201304241213.jar'))
     compile(files('lib/jboss-client.jar'))
+//    compile(files('lib/eclipselink/jlib/eclipselink.jar'))
     implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.26'
     compileOnly('javax:javaee-web-api:8.0.1')
+    implementation group: 'org.eclipse.persistence', name: 'eclipselink', version: '2.5.1'
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
