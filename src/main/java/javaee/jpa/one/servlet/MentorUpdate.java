@@ -3,6 +3,7 @@ package javaee.jpa.one.servlet;
 import javaee.jpa.one.entity.Mentor;
 import javaee.jpa.one.service.MentorService;
 import javaee.jpa.one.service.MentorServiceImp;
+import jluee.jpa.stu.Stu;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +27,17 @@ public class MentorUpdate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
+        Mentor mentor=new Mentor(Integer.parseInt(req.getParameter("id")),Integer.parseInt(req.getParameter("age")),req.getParameter("gender"),req.getParameter("name"));
+        mentorService.update(Integer.parseInt(req.getParameter("id")),mentor);
 
-
+        //返回结果
+        PrintWriter out = resp.getWriter();
+        List<Mentor> result = mentorService.findAll();
+        out.println("id\t gender \t age \t name");
+        out.println("<br>");
+        for (Mentor m: result) {
+            out.println(m.getId() + "\t" + m.getGender() + "\t" + m.getAge() + "\t"+ m.getTeacherName());
+            out.println("<br>");
+        }
     }
 }

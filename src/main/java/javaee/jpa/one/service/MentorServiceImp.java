@@ -57,7 +57,7 @@ public class MentorServiceImp implements MentorService{
         Mentor m = em.find(Mentor.class, id);
         m.setAge(mentor.getAge());
         m.setGender(mentor.getGender());
-        m.setTeacherName(m.getTeacherName());
+        m.setTeacherName(mentor.getTeacherName());
 
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
