@@ -6,6 +6,8 @@
         <class>jluee.jpa.student.Address</class>
         <class>jluee.jpa.stu.Stu</class>
         <class>javaee.jpa.one.entity.Mentor</class>
+        <class>javaee.jpa.two.entity.Teacher</class>
+        <class>javaee.jpa.two.entity.Course</class>
 <!--        ets-->
     </persistence-unit>
 </persistence>
