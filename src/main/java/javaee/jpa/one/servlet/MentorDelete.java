@@ -26,14 +26,14 @@ public class MentorDelete extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
+        mentorService.delete(Integer.parseInt(req.getParameter("id")));
+        //返回结果
         PrintWriter out = resp.getWriter();
-
         List<Mentor> result = mentorService.findAll();
-
-        out.println("Id\tname\tmajor");
+        out.println("id\t gender \t age \t name");
         out.println("<br>");
-        for (Mentor mentor: result) {
-            out.println(mentor.getId() + "\t" + mentor.getGender() + "\t" + mentor.getAge() + "\t"+ mentor.getTeacherName());
+        for (Mentor m: result) {
+            out.println(m.getId() + "\t" + m.getGender() + "\t" + m.getAge() + "\t"+ m.getTeacherName());
             out.println("<br>");
         }
     }
