@@ -17,18 +17,22 @@
         <label>
             <input class="theinput" type="text" name="id"/>
         </label>
+        <br>
         <label>姓名:</label>
         <label>
             <input class="theinput" type="text" name="name"/>
         </label>
+        <br>
         <label>性别:</label>
         <label>
             <input class="theinput" type="text" name="gender"/>
         </label>
+        <br>
         <label>年龄:</label>
         <label>
             <input class="theinput" type="text" name="age"/>
         </label>
+        <br>
         <label>课程:</label>
         <label>
             <input class="theinput" type="text" name="course"/>
@@ -36,15 +40,17 @@
 
     </div>
     <br>
-    <input class="submit" type="submit" value="单实体插入" onclick="document.f.action='/hello/jpa/mentor/add';document.f.submit();"/>
-    <input class="submit" type="submit" value="单实体查询" onclick="document.f.action='/hello/jpa/mentor/select';document.f.submit();"/>
-    <input class="submit" type="submit" value="单实体删除" onclick="document.f.action='/hello/jpa/mentor/delete';document.f.submit();"/>
-    <input class="submit" type="submit" value="单实体更新" onclick="document.f.action='/hello/jpa/mentor/update';document.f.submit();"/>
+    <label>single:</label>
+    <input class="submit" type="submit" value="insert" onclick="document.f.action='/hello/jpa/mentor/add';document.f.submit();"/>
+    <input class="submit" type="submit" value="select" onclick="document.f.action='/hello/jpa/mentor/select';document.f.submit();"/>
+    <input class="submit" type="submit" value="delete" onclick="document.f.action='/hello/jpa/mentor/delete';document.f.submit();"/>
+    <input class="submit" type="submit" value="update" onclick="document.f.action='/hello/jpa/mentor/update';document.f.submit();"/>
     <br>
-    <input class="submit" type="submit" value="一对一插入" onclick="document.f.action='/hello/jpa/teacher/add';document.f.submit();"/>
-    <input class="submit" type="submit" value="一对一查询" onclick="document.f.action='/hello/jpa/teacher/select';document.f.submit();"/>
-    <input class="submit" type="submit" value="一对一删除" onclick="document.f.action='/hello/jpa/teacher/delete';document.f.submit();"/>
-    <input class="submit" type="submit" value="一对一更新" onclick="document.f.action='/hello/jpa/teacher/update';document.f.submit();"/>
+    <label>relation:</label>
+    <input class="submit" type="submit" value="insert" onclick="document.f.action='/hello/jpa/teacher/add';document.f.submit();"/>
+    <input class="submit" type="submit" value="select" onclick="document.f.action='/hello/jpa/teacher/select';document.f.submit();"/>
+    <input class="submit" type="submit" value="delete" onclick="document.f.action='/hello/jpa/teacher/delete';document.f.submit();"/>
+    <input class="submit" type="submit" value="update" onclick="document.f.action='/hello/jpa/teacher/update';document.f.submit();"/>
     <br>
 
 
