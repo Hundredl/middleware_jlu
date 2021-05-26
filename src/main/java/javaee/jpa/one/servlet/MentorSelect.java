@@ -3,7 +3,6 @@ package javaee.jpa.one.servlet;
 import javaee.jpa.one.entity.Mentor;
 import javaee.jpa.one.service.MentorService;
 import javaee.jpa.one.service.MentorServiceImp;
-import jluee.jpa.stu.Stu;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

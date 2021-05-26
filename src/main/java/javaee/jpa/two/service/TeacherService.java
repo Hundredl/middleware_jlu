@@ -1,6 +1,5 @@
 package javaee.jpa.two.service;
 
-import javaee.jpa.one.entity.Mentor;
 import javaee.jpa.two.entity.Teacher;
 
 import java.util.List;

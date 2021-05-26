@@ -1,7 +1,4 @@
 package javaee.jpa.two.entity;
-
-import javaee.jpa.two.entity.Course;
-
 import javax.persistence.*;
 
 @Entity

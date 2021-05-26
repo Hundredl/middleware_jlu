@@ -1,7 +1,6 @@
 package javaee.jpa.one.service;
 
 import javaee.jpa.one.entity.Mentor;
-import jluee.jpa.stu.Stu;
 
 import javax.persistence.*;
 import java.util.List;

@@ -1,8 +1,5 @@
 package javaee.jpa.two.servlet;
 
-import javaee.jpa.one.entity.Mentor;
-import javaee.jpa.one.service.MentorService;
-import javaee.jpa.one.service.MentorServiceImp;
 import javaee.jpa.two.entity.Teacher;
 import javaee.jpa.two.service.TeacherService;
 import javaee.jpa.two.service.TeacherServiceImp;

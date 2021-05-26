@@ -1,6 +1,5 @@
 package javaee.jpa.two.servlet;
 
-import javaee.jpa.two.entity.Course;
 import javaee.jpa.two.entity.Teacher;
 import javaee.jpa.two.service.TeacherService;
 import javaee.jpa.two.service.TeacherServiceImp;
