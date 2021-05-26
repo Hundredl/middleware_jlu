@@ -5,7 +5,7 @@ import javaee.jpa.two.entity.Course;
 import javax.persistence.*;
 
 @Entity
-public class Teacher {
+public class Mentor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -13,19 +13,14 @@ public class Teacher {
     private String gender;
     private String teacherName;
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "courseId")
-    private Course course;
-
-    public Teacher() {
+    public Mentor() {
     }
 
-    public Teacher(int id, int age, String gender, String teacherName, Course course) {
+    public Mentor(int id, int age, String gender, String teacherName) {
         this.id = id;
         this.age = age;
         this.gender = gender;
         this.teacherName = teacherName;
-        this.course = course;
     }
 
     public int getId() {
@@ -58,13 +53,5 @@ public class Teacher {
 
     public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
     }
 }

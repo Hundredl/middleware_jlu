@@ -3,7 +3,7 @@ version: "2"
 services:
   app:
     # Retrive pre-built image from DockerHub
-#    image: kaaass/wildfly-mysql:java-7-jboss-as-7.1.1.Final-mysql-5.7
+    image: kaaass/wildfly-mysql:java-7-jboss-as-7.1.1.Final-mysql-5.7
     # Or build locally by removing comments below
     build:
       context: .

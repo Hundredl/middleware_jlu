@@ -5,6 +5,7 @@
         <class>jluee.jpa.student.Student</class>
         <class>jluee.jpa.student.Address</class>
         <class>jluee.jpa.stu.Stu</class>
+        <class>javaee.jpa.one.entity.Mentor</class>
 <!--        ets-->
     </persistence-unit>
 </persistence>
