@@ -14,7 +14,7 @@ public class ManyToManyTeacher implements Serializable {
     private String gender;
     private String teacherName;
     @ManyToMany(cascade={CascadeType.ALL})
-    @JoinTable(name="MANYTOMANY_REF_STUDENT_TEACHER",
+    @JoinTable(name= "MANYTOMANY_REF_TEACHER_COURSE",
     joinColumns = {
             @JoinColumn(name="teacher_id",referencedColumnName = "id")
     },
