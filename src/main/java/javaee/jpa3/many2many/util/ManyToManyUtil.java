@@ -5,7 +5,9 @@ import javaee.jpa3.many2many.entity.ManyToManyTeacher;
 import javaee.jpa3.one2many.entity.OneToManyCourse;
 import javaee.jpa3.one2many.entity.OneToManyTeacher;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ManyToManyUtil {
@@ -21,5 +23,24 @@ public class ManyToManyUtil {
             }
             out.println("<br>");
         }
+    }
+    public static ManyToManyTeacher getTeacher(HttpServletRequest req)
+    {
+        ManyToManyTeacher teacher;
+        Integer id=Integer.parseInt(req.getParameter("id"));
+        Integer age=Integer.parseInt(req.getParameter("age"));
+        String name=req.getParameter("name");
+        String gender=req.getParameter("gender");
+        String courses=req.getParameter("course");
+        List<ManyToManyCourse> courseList=new ArrayList<>();
+        teacher=new ManyToManyTeacher(id,age,gender,name,courseList);
+        for(String courseName:courses.split("&"))
+        {
+            ManyToManyCourse course=new ManyToManyCourse();
+            course.setCourseName(courseName);
+            course.getTeachers().add(teacher);
+            teacher.getCourses().add(course);
+        }
+        return teacher;
     }
 }

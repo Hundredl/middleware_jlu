@@ -3,10 +3,7 @@ package javaee.jpa3.many2many.service;
 import javaee.jpa3.many2many.entity.ManyToManyTeacher;
 import javaee.jpa3.one2many.entity.OneToManyTeacher;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.List;
 
 public class ManyToManyTeacherServiceImp implements ManyToManyTeacherService{
@@ -26,6 +23,12 @@ public class ManyToManyTeacherServiceImp implements ManyToManyTeacherService{
 
     @Override
     public void add(ManyToManyTeacher teacher) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.persist(teacher);
+        transaction.commit();
+        em.close();
 
     }
 

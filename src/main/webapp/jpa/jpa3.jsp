@@ -47,10 +47,10 @@
     <input class="submit" type="submit" value="update" onclick="document.f.action='/hello/jpa3/one2many/update';document.f.submit();"/>
     <br>
     <label>many2many:</label>
-    <input class="submit" type="submit" value="insert" onclick="document.f.action='/hello/jpa/teacher/add';document.f.submit();"/>
-    <input class="submit" type="submit" value="select" onclick="document.f.action='/hello/jpa/teacher/select';document.f.submit();"/>
-    <input class="submit" type="submit" value="delete" onclick="document.f.action='/hello/jpa/teacher/delete';document.f.submit();"/>
-    <input class="submit" type="submit" value="update" onclick="document.f.action='/hello/jpa/teacher/update';document.f.submit();"/>
+    <input class="submit" type="submit" value="insert" onclick="document.f.action='/hello/jpa3/many2many/add';document.f.submit();"/>
+    <input class="submit" type="submit" value="select" onclick="document.f.action='/hello/jpa3/many2many/select';document.f.submit();"/>
+    <input class="submit" type="submit" value="delete" onclick="document.f.action='/hello/jpa3/many2many/delete';document.f.submit();"/>
+    <input class="submit" type="submit" value="update" onclick="document.f.action='/hello/jpa3/many2many/update';document.f.submit();"/>
     <br>
 </form>
 </body>

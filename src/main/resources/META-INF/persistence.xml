@@ -7,5 +7,7 @@
         <class>javaee.jpa.two.entity.Course</class>
         <class>javaee.jpa3.one2many.entity.OneToManyTeacher</class>
         <class>javaee.jpa3.one2many.entity.OneToManyCourse</class>
+        <class>javaee.jpa3.many2many.entity.ManyToManyTeacher</class>
+        <class>javaee.jpa3.many2many.entity.ManyToManyCourse</class>
     </persistence-unit>
 </persistence>
