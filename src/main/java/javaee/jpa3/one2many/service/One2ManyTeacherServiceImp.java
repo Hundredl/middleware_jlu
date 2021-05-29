@@ -1,5 +1,6 @@
 package javaee.jpa3.one2many.service;
 
+import javaee.jpa3.one2many.entity.OneToManyCourse;
 import javaee.jpa3.one2many.entity.OneToManyTeacher;
 
 import javax.persistence.*;
@@ -45,11 +46,22 @@ public class One2ManyTeacherServiceImp implements One2ManyTeacherService{
         t.setAge(teacher.getAge());
         t.setGender(teacher.getGender());
         t.setTeacherName(teacher.getTeacherName());
-        t.setCourses(teacher.getCourses());
 
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
+        //先删
+        /*for(OneToManyCourse course:teacher.getCourses())
+        {
+            if(!em.contains(course))
+            {
+                em.merge(course) ;
+            }
+            em.remove(course);
+        }*/
+        //再更
+        t.setCourses(teacher.getCourses());
         em.merge(t);
+        em.flush();
         transaction.commit();
         em.close();
     }

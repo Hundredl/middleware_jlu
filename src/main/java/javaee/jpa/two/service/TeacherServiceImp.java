@@ -41,7 +41,6 @@ public class TeacherServiceImp implements TeacherService {
     public void delete(Integer id) {
         EntityManager em = emf.createEntityManager();
         Teacher teacher = em.find(Teacher.class, id);
-
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.remove(teacher);
@@ -63,7 +62,6 @@ public class TeacherServiceImp implements TeacherService {
         transaction.begin();
         em.merge(m);
         transaction.commit();
-
         em.close();
     }
 }
