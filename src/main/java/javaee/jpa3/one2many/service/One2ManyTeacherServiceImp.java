@@ -1,5 +1,6 @@
 package javaee.jpa3.one2many.service;
 
+import javaee.jpa.two.entity.Teacher;
 import javaee.jpa3.one2many.entity.OneToManyCourse;
 import javaee.jpa3.one2many.entity.OneToManyTeacher;
 
@@ -36,7 +37,13 @@ public class One2ManyTeacherServiceImp implements One2ManyTeacherService{
 
     @Override
     public void delete(Integer id) {
-
+        EntityManager em = emf.createEntityManager();
+        OneToManyTeacher teacher = em.find(OneToManyTeacher.class, id);
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.remove(teacher);
+        transaction.commit();
+        em.close();
     }
 
     @Override
