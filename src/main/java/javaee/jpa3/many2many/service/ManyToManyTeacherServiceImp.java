@@ -39,6 +39,16 @@ public class ManyToManyTeacherServiceImp implements ManyToManyTeacherService{
 
     @Override
     public void update(Integer id, ManyToManyTeacher teacher) {
-
+        EntityManager em = emf.createEntityManager();
+        ManyToManyTeacher t=em.find(ManyToManyTeacher.class,id);
+        t.setAge(teacher.getAge());
+        t.setGender(teacher.getGender());
+        t.setTeacherName(teacher.getTeacherName());
+        t.setCourses(teacher.getCourses());
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.merge(t);
+        transaction.commit();
+        em.close();
     }
 }
