@@ -4,6 +4,7 @@ import javaee.jpa3.one2many.entity.OneToManyCourse;
 import javaee.jpa3.one2many.entity.OneToManyTeacher;
 import javaee.jpa3.one2many.service.One2ManyTeacherService;
 import javaee.jpa3.one2many.service.One2ManyTeacherServiceImp;
+import javaee.jpa3.one2many.util.OneToManyUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,17 +27,6 @@ public class One2ManySelect extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         //返回结果
-        PrintWriter out = resp.getWriter();
-        List<OneToManyTeacher> result = service.findAll();
-        out.println("id\t name \t age \t gender \t courses");
-        out.println("<br>");
-        for (OneToManyTeacher m: result) {
-            out.print(m.getId() + "\t" +m.getTeacherName()+"\t"+m.getAge() + "\t" + m.getGender() + "\t | ");
-            for (OneToManyCourse c:m.getCourses())
-            {
-                out.println(c.getCourseName() + " \t");
-            }
-            out.println("<br>");
-        }
+        OneToManyUtil.outToPage(resp.getWriter(),service.findAll());
     }
 }

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>jpa</title>
+    <title>jpa3</title>
 </head>
 <body>
 <form name="f" action='bind' method="post" id="userform">
@@ -52,8 +52,6 @@
     <input class="submit" type="submit" value="delete" onclick="document.f.action='/hello/jpa/teacher/delete';document.f.submit();"/>
     <input class="submit" type="submit" value="update" onclick="document.f.action='/hello/jpa/teacher/update';document.f.submit();"/>
     <br>
-
-
 </form>
 </body>
 </html>

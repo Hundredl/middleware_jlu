@@ -18,10 +18,6 @@ public class One2ManyTeacherServiceImp implements One2ManyTeacherService{
         EntityManager entityManager = emf.createEntityManager();
         Query query = entityManager.createQuery("select t from OneToManyTeacher T");
         List<OneToManyTeacher> result = query.getResultList();
-        for(OneToManyTeacher t:result)
-        {
-            System.out.println(t.getId()+" "+t.getTeacherName()+ " "+ Arrays.toString(t.getCourses().toArray()));
-        }
         entityManager.close();
         return result;
     }
@@ -44,6 +40,17 @@ public class One2ManyTeacherServiceImp implements One2ManyTeacherService{
 
     @Override
     public void update(Integer id, OneToManyTeacher teacher) {
+        EntityManager em = emf.createEntityManager();
+        OneToManyTeacher t=em.find(OneToManyTeacher.class,id);
+        t.setAge(teacher.getAge());
+        t.setGender(teacher.getGender());
+        t.setTeacherName(teacher.getTeacherName());
+        t.setCourses(teacher.getCourses());
 
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.merge(t);
+        transaction.commit();
+        em.close();
     }
 }
