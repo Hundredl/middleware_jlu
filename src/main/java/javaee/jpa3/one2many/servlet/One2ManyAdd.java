@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-@WebServlet(name = "One2ManySelect" ,value = "/jpa3/one2many/select")
-public class One2ManySelect extends HttpServlet {
+@WebServlet(name = "One2ManyAdd" ,value = "/jpa3/one2many/add")
+public class One2ManyAdd extends HttpServlet {
     private static One2ManyTeacherService service=new One2ManyTeacherServiceImp();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,6 +27,24 @@ public class One2ManySelect extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
+        //准备数据
+        OneToManyTeacher teacher;
+        Integer id=Integer.parseInt(req.getParameter("id"));
+        Integer age=Integer.parseInt(req.getParameter("age"));
+        String name=req.getParameter("name");
+        String gender=req.getParameter("gender");
+        String courses=req.getParameter("course");
+        List<OneToManyCourse> courseList=new ArrayList<>();
+        teacher=new OneToManyTeacher(id,age,gender,name,courseList);
+        for(String courseName:courses.split("&"))
+        {
+            OneToManyCourse course=new OneToManyCourse();
+            course.setCourseName(courseName);
+            course.setTeacher(teacher);
+            teacher.getCourses().add(course);
+        }
+        //添加结果
+        service.add(teacher);
         //返回结果
         PrintWriter out = resp.getWriter();
         List<OneToManyTeacher> result = service.findAll();

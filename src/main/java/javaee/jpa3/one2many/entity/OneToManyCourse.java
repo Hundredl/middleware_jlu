@@ -1,16 +1,16 @@
 package javaee.jpa3.one2many.entity;
 
 import javax.persistence.*;
-
-public class One2manyCourse {
+@Entity
+public class OneToManyCourse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String courseName;
     @ManyToOne(cascade={CascadeType.ALL})
-    @JoinColumn(name="teacherId")
-    private One2manyTeacher teacher;
-    public One2manyCourse() {
+    @JoinColumn(name= "teacher_id")
+    private OneToManyTeacher teacher;
+    public OneToManyCourse() {
     }
 
     public Integer getId() {
@@ -29,11 +29,19 @@ public class One2manyCourse {
         this.courseName = courseName;
     }
 
-    public One2manyTeacher getTeacher() {
+    public OneToManyTeacher getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(One2manyTeacher teacher) {
+    public void setTeacher(OneToManyTeacher teacher) {
         this.teacher = teacher;
+    }
+
+    @Override
+    public String toString() {
+        return "OneToManyCourse{" +
+                "id=" + id +
+                ", courseName='" + courseName + '\'' +
+                '}';
     }
 }

@@ -5,8 +5,7 @@
         <class>javaee.jpa.one.entity.Mentor</class>
         <class>javaee.jpa.two.entity.Teacher</class>
         <class>javaee.jpa.two.entity.Course</class>
-        <class>javaee.jpa3.one2many.entity.One2manyTeacher</class>
-        <class>javaee.jpa3.one2many.entity.One2manyCourse</class>
-<!--        ets-->
+        <class>javaee.jpa3.one2many.entity.OneToManyTeacher</class>
+        <class>javaee.jpa3.one2many.entity.OneToManyCourse</class>
     </persistence-unit>
 </persistence>

@@ -1,16 +1,15 @@
 package javaee.jpa3.one2many.service;
 
-import javaee.jpa.two.entity.Teacher;
-import javaee.jpa3.one2many.entity.One2manyTeacher;
+import javaee.jpa3.one2many.entity.OneToManyTeacher;
 
 import java.util.List;
 
 public interface One2ManyTeacherService {
-    List<One2manyTeacher> findAll();
+    List<OneToManyTeacher> findAll();
 
-    void add(One2manyTeacher teacher);
+    void add(OneToManyTeacher teacher);
 
     void delete(Integer id);
 
-    void update(Integer id, One2manyTeacher teacher);
+    void update(Integer id, OneToManyTeacher teacher);
 }

@@ -1,14 +1,11 @@
 package javaee.jpa3.one2many.service;
 
-import javaee.jpa.two.entity.Teacher;
-import javaee.jpa3.one2many.entity.One2manyTeacher;
+import javaee.jpa3.one2many.entity.OneToManyTeacher;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.Arrays;
 import java.util.List;
+
 
 public class One2ManyTeacherServiceImp implements One2ManyTeacherService{
     private static EntityManagerFactory emf;
@@ -17,11 +14,11 @@ public class One2ManyTeacherServiceImp implements One2ManyTeacherService{
         emf = Persistence.createEntityManagerFactory("jpaUnit");
     }
     @Override
-    public List<One2manyTeacher> findAll() {
+    public List<OneToManyTeacher> findAll() {
         EntityManager entityManager = emf.createEntityManager();
-        Query query = entityManager.createQuery("select t from Teacher T");
-        List<One2manyTeacher> result = query.getResultList();
-        for(One2manyTeacher t:result)
+        Query query = entityManager.createQuery("select t from OneToManyTeacher T");
+        List<OneToManyTeacher> result = query.getResultList();
+        for(OneToManyTeacher t:result)
         {
             System.out.println(t.getId()+" "+t.getTeacherName()+ " "+ Arrays.toString(t.getCourses().toArray()));
         }
@@ -30,8 +27,14 @@ public class One2ManyTeacherServiceImp implements One2ManyTeacherService{
     }
 
     @Override
-    public void add(One2manyTeacher teacher) {
+    public void add(OneToManyTeacher teacher) {
+        EntityManager em = emf.createEntityManager();
 
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.persist(teacher);
+        transaction.commit();
+        em.close();
     }
 
     @Override
@@ -40,7 +43,7 @@ public class One2ManyTeacherServiceImp implements One2ManyTeacherService{
     }
 
     @Override
-    public void update(Integer id, One2manyTeacher teacher) {
+    public void update(Integer id, OneToManyTeacher teacher) {
 
     }
 }

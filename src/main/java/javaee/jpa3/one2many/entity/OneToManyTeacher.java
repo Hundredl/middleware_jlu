@@ -3,8 +3,8 @@ package javaee.jpa3.one2many.entity;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
-
-public class One2manyTeacher {
+@Entity
+public class OneToManyTeacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -12,9 +12,9 @@ public class One2manyTeacher {
     private String gender;
     private String teacherName;
     @OneToMany(cascade = { CascadeType.ALL },mappedBy="teacher")
-    private Collection<One2manyCourse> courses=new ArrayList<One2manyCourse>();
+    private Collection<OneToManyCourse> courses=new ArrayList<OneToManyCourse>();
 
-    public One2manyTeacher() {
+    public OneToManyTeacher() {
     }
 
     public int getId() {
@@ -49,11 +49,19 @@ public class One2manyTeacher {
         this.teacherName = teacherName;
     }
 
-    public Collection<One2manyCourse> getCourses() {
+    public Collection<OneToManyCourse> getCourses() {
         return courses;
     }
 
-    public void setCourses(Collection<One2manyCourse> courses) {
+    public void setCourses(Collection<OneToManyCourse> courses) {
+        this.courses = courses;
+    }
+
+    public OneToManyTeacher(int id, int age, String gender, String teacherName, Collection<OneToManyCourse> courses) {
+        this.id = id;
+        this.age = age;
+        this.gender = gender;
+        this.teacherName = teacherName;
         this.courses = courses;
     }
 }
