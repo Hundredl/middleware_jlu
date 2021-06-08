@@ -3,6 +3,11 @@
   <component name="MyBatisCodeHelperDatasource">
     <option name="projectProfile">
       <ProjectProfile>
+        <option name="generatedClassPathList">
+          <list>
+            <option value="E:\OneDrive - Fwiup\workspace\idea_workspace\html\210525softcomponent\src\main\java\javaee\book\entity" />
+          </list>
+        </option>
         <option name="javaMapperPackage" value="com.mapper" />
         <option name="javaMapperPath" value="$PROJECT_DIR$/src/main/java" />
         <option name="javaModelPackage" value="javaee.jpa3.one2many.entity" />
