@@ -19,8 +19,8 @@ public class Test extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //req.getSession().setAttribute("user","user");
-        if (UserFilter.filter(req,resp, GlobalVar.userType.user)){return;}
+        req.getSession().setAttribute("user","user");
+        //if (UserFilter.filter(req,resp, GlobalVar.userType.user)){return;}
         req.getRequestDispatcher("/book/pages/user/test.html").forward(req,resp);
     }
 }
