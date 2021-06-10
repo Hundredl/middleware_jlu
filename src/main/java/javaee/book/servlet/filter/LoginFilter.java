@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * µÇÂ¼À¹½Ø£¬²»µÇÂ½µÄÓÃ»§²»ÄÜ·ÃÎÊ½çÃæ
+ * ç™»å½•æ‹¦æˆªï¼Œä¸ç™»é™†çš„ç”¨æˆ·ä¸èƒ½è®¿é—®ç•Œé¢
  */
 @WebFilter(
         filterName = "loginFilter",
@@ -20,15 +20,15 @@ public class LoginFilter implements Filter {
     private FilterConfig config;
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        //»ñÈ¡ÅäÖÃ²ÎÊı
+        //è·å–é…ç½®å‚æ•°
         String loginUrl=config.getInitParameter("loginUrl");
         String encoding = config.getInitParameter("encoding");
-        //»ñÈ¡ÇëÇó
+        //è·å–è¯·æ±‚
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        // ÉèÖÃÇëÇóµÄ×Ö·û¼¯£¨postÇëÇó·½Ê½ÓĞĞ§£©
+        // è®¾ç½®è¯·æ±‚çš„å­—ç¬¦é›†ï¼ˆpostè¯·æ±‚æ–¹å¼æœ‰æ•ˆï¼‰
         request.setCharacterEncoding(encoding);
-        //»ñÈ¡²»´øhttp://:¶Ë¿ÚµÄµØÖ·
+        //è·å–ä¸å¸¦http://:ç«¯å£çš„åœ°å€
         String uri = req.getRequestURI();
         if (uri.contains(loginUrl))
         {

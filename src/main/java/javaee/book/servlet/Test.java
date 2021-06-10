@@ -2,6 +2,7 @@ package javaee.book.servlet;
 
 import javaee.book.servlet.utils.UserFilter;
 import javaee.book.utils.GlobalVar;
+import javaee.book.utils.PageTurn;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,8 @@ public class Test extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession().setAttribute("user","user");
+        PageTurn.turnToPage(req,resp, PageTurn.PageName.login);
         //if (UserFilter.filter(req,resp, GlobalVar.userType.user)){return;}
-        req.getRequestDispatcher("/book/pages/user/test.html").forward(req,resp);
+        //req.getRequestDispatcher("/book/pages/user/test.html").forward(req,resp);
     }
 }
