@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 @WebFilter(
         filterName = "loginFilter",
-        urlPatterns = "/book/*",
+        urlPatterns = "/bookssss/*",
         initParams = {
                 @WebInitParam(name = "loginUrl", value = "/book/login"),
                 @WebInitParam(name = "encoding", value = "utf-8")})

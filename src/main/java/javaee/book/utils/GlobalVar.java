@@ -16,5 +16,7 @@ public class GlobalVar {
             default:return GlobalVar.userType.none;
         }
     }
-    public enum RespMsg{login_success,login_failure}
+    public enum RespMsg{
+        login_success,login_failure,
+        signup_success,signup_failure}
 }
