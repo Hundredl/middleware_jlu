@@ -1,7 +1,12 @@
 package javaee.book.utils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class GlobalVar {
-    public static enum userType{user,admin,none}
+    public enum userType{user,admin,none}
     public static userType getUserType(Integer userType)
     {
         switch (userType)
@@ -11,4 +16,5 @@ public class GlobalVar {
             default:return GlobalVar.userType.none;
         }
     }
+    public enum RespMsg{login_success,login_failure}
 }
