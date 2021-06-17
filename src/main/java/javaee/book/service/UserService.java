@@ -15,14 +15,21 @@ public class UserService {
     static {
         emf = Persistence.createEntityManagerFactory("jpaUnit");
     }
-    public boolean canLoginIn(Integer userId,String password)
+    public boolean canLoginIn(String userName,String password)
     {
-        BookUser user=select(userId);
+        BookUser user=selectByUserName(userName);
         return user != null && password.equals(user.getPassword());
     }
     public BookUser select(Integer userId){
         EntityManager entityManager = emf.createEntityManager();
         Query query = entityManager.createQuery("select u from BookUser U");
+        List<BookUser> result = query.getResultList();
+        entityManager.close();
+        return result.get(0);
+    }
+    public BookUser selectByUserName(String userName){
+        EntityManager entityManager = emf.createEntityManager();
+        Query query = entityManager.createNativeQuery(String.format("select * from BOOKUSER where userName='%s'",userName),BookUser.class);
         List<BookUser> result = query.getResultList();
         entityManager.close();
         return result.get(0);

@@ -27,12 +27,12 @@ public class LoginServlet extends HttpServlet {
         resp.setContentType("application/json;charset=UTF-8");
         Map<?,?> params= ServletUtils.getPostParams(req);
 
-        Integer userId=Integer.parseInt(params.get("userId").toString());
+        String userName=params.get("userName").toString();
         String password=params.get("password").toString();
 
-        if (userService.canLoginIn(userId,password))
+        if (userService.canLoginIn(userName,password))
         {
-            BookUser bookUser=userService.select(userId);
+            BookUser bookUser=userService.selectByUserName(userName);
             BookUserResp bookUserResp=new BookUserResp();
             BeanUtils.copyProperties(bookUserResp,bookUser);
             req.getSession().setAttribute("user",bookUserResp);
