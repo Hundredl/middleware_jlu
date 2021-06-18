@@ -11,5 +11,6 @@
         <class>javaee.jpa3.many2many.entity.ManyToManyCourse</class>
 
         <class>javaee.book.entity.BookUser</class>
+        <class>javaee.book.entity.BookBook</class>
     </persistence-unit>
 </persistence>

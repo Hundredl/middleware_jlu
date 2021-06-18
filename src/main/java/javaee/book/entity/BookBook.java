@@ -1,13 +1,20 @@
 package javaee.book.entity;
 
 import java.util.Date;
+
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
+import javax.persistence.*;
+
 @Data
+@Entity
 public class BookBook {
     /**
      * 图书id
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bookId;
 
     /**
@@ -28,6 +35,9 @@ public class BookBook {
     /**
      * 出版时间
      */
+    @Temporal(TemporalType.DATE)
+    //@JSONField(format="yyyy-MM-dd HH:mm:ss.SSS")
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date publishTime;
 
     /**
