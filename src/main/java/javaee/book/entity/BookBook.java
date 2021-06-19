@@ -1,5 +1,6 @@
 package javaee.book.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.alibaba.fastjson.annotation.JSONField;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class BookBook {
+public class BookBook implements Serializable {
     /**
      * 图书id
      */

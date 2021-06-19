@@ -85,4 +85,17 @@ public class BookDao {
         }
         return result;
     }
+
+    public void insertBatch(List<BookBook> bookBookList)
+    {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        for (BookBook book:bookBookList)
+        {
+            em.persist(book);
+        }
+        transaction.commit();
+        em.close();
+    }
 }
