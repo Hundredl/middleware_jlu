@@ -15,8 +15,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-@WebServlet(name = "BookSearchServlet" , value = "/book/pub/book/selectall")
-public class BookSearchServlet extends HttpServlet {
+@WebServlet(name = "BookSearchServlet" , value = "/book/pub/book/selectAll")
+public class BookSelectAllServlet extends HttpServlet {
     @EJB
     BookService bookService;
 
