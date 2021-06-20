@@ -1,6 +1,7 @@
 package javaee.book.dao;
 
 import javaee.book.entity.BookBook;
+import javaee.book.entity.BookUser;
 import javaee.book.entity.req.BookBookReq;
 
 import javax.persistence.*;
@@ -35,7 +36,6 @@ public class BookDao {
      * 根据图书名称、书号、作者、出版时间范围、价格范围、类别查询
      * @param bookBookReq  查询条件
      * @return 查询结果
-     * @throws IllegalAccessException 异常
      */
     public List<BookBook> selectAnd(BookBookReq bookBookReq){
         EntityManager entityManager = emf.createEntityManager();
@@ -93,5 +93,20 @@ public class BookDao {
         }
         transaction.commit();
         em.close();
+    }
+
+    public BookBook selectById(Integer bookId)
+    {
+        EntityManager entityManager = emf.createEntityManager();
+        Query query = entityManager.createNativeQuery(String.format("select * from BOOKBOOK where bookId='%s'",bookId),BookBook.class);
+        List<BookBook> result = query.getResultList();
+        entityManager.close();
+        if (result.size()==0)
+        {
+            return null;
+        }
+        else {
+            return result.get(0);
+        }
     }
 }

@@ -25,4 +25,10 @@ public class OrderDao {
         entityManager.close();
         return result;
     }
+    public void insert(BookOrder bookOrder)
+    {
+        EntityManager entityManager = emf.createEntityManager();
+        entityManager.persist(bookOrder);
+        entityManager.close();
+    }
 }

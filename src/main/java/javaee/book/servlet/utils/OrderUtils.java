@@ -92,4 +92,26 @@ public class OrderUtils {
         bookOrderWithSubOrder.setSubOrderList(bookSubOrderWithBookList);
         return bookOrderWithSubOrder;
     }
+
+    public static BookSubOrderWithBook getBookSubOrderWithBook(BookSubOrder bookSubOrder) throws InvocationTargetException, IllegalAccessException {
+        //拷贝信息
+        BookSubOrderWithBook bookSubOrderWithBook=new BookSubOrderWithBook();
+        BeanUtils.copyProperties(bookSubOrderWithBook,bookSubOrder);
+        //拷贝书籍信息
+        BookBookResp bookBookResp=new BookBookResp();
+        BeanUtils.copyProperties(bookBookResp,bookSubOrder.getBookBook());
+        //设置书籍信息
+        bookSubOrderWithBook.setBook(bookBookResp);
+        return bookSubOrderWithBook;
+    }
+
+    public static List<BookSubOrderWithBook> getBookSubOrderWithBookList(List<BookSubOrder> bookSubOrderList) throws InvocationTargetException, IllegalAccessException {
+        List<BookSubOrderWithBook> bookSubOrderWithBookList=new LinkedList<>();
+        for (BookSubOrder bookSubOrder:bookSubOrderList)
+        {
+            BookSubOrderWithBook bookSubOrderWithBook = getBookSubOrderWithBook(bookSubOrder);
+            bookSubOrderWithBookList.add(bookSubOrderWithBook);
+        }
+        return bookSubOrderWithBookList;
+    }
 }

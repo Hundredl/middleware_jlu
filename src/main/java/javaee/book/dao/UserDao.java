@@ -11,9 +11,9 @@ public class UserDao {
     static {
         emf = Persistence.createEntityManagerFactory("jpaUnit");
     }
-    public BookUser select(Integer userId){
+    public BookUser selectById(Integer userId){
         EntityManager entityManager = emf.createEntityManager();
-        Query query = entityManager.createQuery("select u from BookUser U");
+        Query query = entityManager.createNativeQuery(String.format("select * from BOOKUSER where userId='%s'",userId),BookUser.class);
         List<BookUser> result = query.getResultList();
         entityManager.close();
         if (result.size()==0)
@@ -37,7 +37,7 @@ public class UserDao {
             return result.get(0);
         }
     }
-    public void select(BookUser bookUser)
+    public void selectById(BookUser bookUser)
     {
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();

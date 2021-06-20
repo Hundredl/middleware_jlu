@@ -16,6 +16,6 @@ public class UserService {
     }
     public void add(BookUser bookUser)
     {
-        userDao.select(bookUser);
+        userDao.selectById(bookUser);
     }
 }
