@@ -1,6 +1,6 @@
 package javaee.book.servlet.admin.book;
 
-import javaee.book.entity.BookIsbnVerifyReq;
+import javaee.book.entity.req.BookIsbnVerifyReq;
 import javaee.book.service.BookService;
 import javaee.book.utils.GlobalVar;
 import javaee.book.utils.ServletUtils;
@@ -24,7 +24,7 @@ public class BookIsbnVerifyServlet extends HttpServlet {
         Map<?,?> params= ServletUtils.getPostParams(req);
         System.out.println(params);
         String isbnRaw=params.get("isbnRaw")==null?null:params.get("isbnRaw").toString();
-        String isbn="";
+        String isbn;
         if (isbnRaw!=null)
         {
             isbn=bookService.isbnVerify(isbnRaw);

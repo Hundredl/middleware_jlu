@@ -13,5 +13,6 @@
         <class>javaee.book.entity.BookUser</class>
         <class>javaee.book.entity.BookBook</class>
         <class>javaee.book.entity.BookOrder</class>
+        <class>javaee.book.entity.BookSubOrder</class>
     </persistence-unit>
 </persistence>

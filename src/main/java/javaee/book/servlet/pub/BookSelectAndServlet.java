@@ -2,7 +2,7 @@ package javaee.book.servlet.pub;
 
 import com.alibaba.fastjson.JSONObject;
 import javaee.book.entity.BookBook;
-import javaee.book.entity.BookBookReq;
+import javaee.book.entity.req.BookBookReq;
 import javaee.book.service.BookService;
 import javaee.book.utils.GlobalVar;
 import javaee.book.utils.ServletUtils;

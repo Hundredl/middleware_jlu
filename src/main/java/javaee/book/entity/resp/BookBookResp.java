@@ -1,4 +1,4 @@
-package javaee.book.entity;
+package javaee.book.entity.resp;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.AllArgsConstructor;
@@ -7,10 +7,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+/*纯粹的书籍信息*/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookBookReq {
+public class BookBookResp {
+    /**
+     * 图书id
+     */
+    private Integer bookId;
 
     /**
      * 图书名称
@@ -28,31 +33,25 @@ public class BookBookReq {
     private String author;
 
     /**
-     * 出版时间开始
+     * 出版时间
      */
     @Temporal(TemporalType.DATE)
+    //@JSONField(format="yyyy-MM-dd HH:mm:ss.SSS")
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
-    private Date publishTimeBegin;
-    /**
-     * 出版时间结尾
-     */
-    @Temporal(TemporalType.DATE)
-    @JSONField(format="yyyy-MM-dd HH:mm:ss")
-    private Date publishTimeEnd;
+    private Date publishTime;
 
     /**
-     * 最低价格
+     * 价格
      */
-    private Double priceLow;
-
-    /**
-     * 最高价格
-     */
-    private Double priceHigh;
+    private Double price;
 
     /**
      * 图书类别
      */
     private String category;
 
+    /**
+     * 数量
+     */
+    private Integer count;
 }

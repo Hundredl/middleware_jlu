@@ -1,21 +1,17 @@
 package javaee.book.servlet.login;
 
-import com.alibaba.fastjson.JSON;
 import javaee.book.entity.BookUser;
-import javaee.book.entity.BookUserResp;
+import javaee.book.entity.resp.BookUserResp;
 import javaee.book.service.UserService;
 import javaee.book.utils.GlobalVar;
-import javaee.book.utils.Resp;
 import javaee.book.utils.ServletUtils;
 import lombok.SneakyThrows;
 import org.apache.commons.beanutils.BeanUtils;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Map;
 
 @WebServlet(name = "LoginServlet" , value = "/book/login")

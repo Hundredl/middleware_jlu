@@ -1,20 +1,21 @@
-package javaee.book.entity;
-
-import java.io.Serializable;
-import java.util.Date;
+package javaee.book.entity.resp;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import javaee.book.entity.BookSubOrder;
+import javaee.book.entity.BookUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+/*订单和子订单信息，子订单信息包含图书*/
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class BookOrderResp implements Serializable {
-
+@AllArgsConstructor
+public class BookOrderWithSubOrder {
     /**
      * 订单id
      */
@@ -47,7 +48,10 @@ public class BookOrderResp implements Serializable {
      */
     private Double total;
 
+    /**
+     * 子订单
+     */
+    private List<BookSubOrderWithBook> subOrderList= new ArrayList<>();
 
-    private static final long serialVersionUID = 1L;
+
 }
-

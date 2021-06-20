@@ -1,13 +1,9 @@
 package javaee.book.dao;
 
 import javaee.book.entity.BookBook;
-import javaee.book.entity.BookBookReq;
-import javaee.book.entity.BookUser;
+import javaee.book.entity.req.BookBookReq;
 
 import javax.persistence.*;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 

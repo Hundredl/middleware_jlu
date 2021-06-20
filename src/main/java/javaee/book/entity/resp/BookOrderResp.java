@@ -1,8 +1,8 @@
-package javaee.book.entity;
+package javaee.book.entity.resp;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.alibaba.fastjson.annotation.JSONField;
@@ -15,14 +15,12 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class BookOrder implements Serializable {
+/*纯粹的订单信息*/
+public class BookOrderResp implements Serializable {
 
     /**
      * 订单id
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderId;
 
     /**
@@ -52,26 +50,11 @@ public class BookOrder implements Serializable {
      */
     private Double total;
 
-    @ManyToOne(cascade={CascadeType.ALL})
-    @JoinColumn(name="userId")
-    private BookUser user;//一个订单对应一个user
 
     /**
      * 子订单
      */
-    @OneToMany(cascade = { CascadeType.ALL },mappedBy="bookOrder")
-    private List<BookSubOrder> subOrderList= new ArrayList<>();
-
-    public BookOrder(Integer orderId, String address, Date deliveryTime, String receiverName, String tel, Double total, BookUser user) {
-        this.orderId = orderId;
-        this.address = address;
-        this.deliveryTime = deliveryTime;
-        this.receiverName = receiverName;
-        this.tel = tel;
-        this.total = total;
-        this.user = user;
-    }
-
+    List<BookSubOrderWithBook> subOrderList=new LinkedList<>();
     private static final long serialVersionUID = 1L;
 }
 

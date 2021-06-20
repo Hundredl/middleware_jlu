@@ -1,4 +1,4 @@
-package javaee.book.entity;
+package javaee.book.entity.req;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

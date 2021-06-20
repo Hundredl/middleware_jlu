@@ -43,6 +43,7 @@ public class ServletUtils {
     }
 
     public static <T> void returnResp(HttpServletResponse resp, GlobalVar.RespMsg msg, T data) throws IOException {
+        resp.setContentType("application/json;charset=UTF-8");
         Resp<T> result=new Resp<>();
         result.setMsg(msg.toString());
         result.setData(data);

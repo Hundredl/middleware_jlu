@@ -1,7 +1,7 @@
 package javaee.book.servlet.login;
 
 import javaee.book.entity.BookUser;
-import javaee.book.entity.BookUserResp;
+import javaee.book.entity.resp.BookUserResp;
 import javaee.book.service.UserService;
 import javaee.book.utils.GlobalVar;
 import javaee.book.utils.ServletUtils;
@@ -13,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.print.Book;
 import java.io.IOException;
 import java.util.Map;
 

@@ -4,7 +4,7 @@ import book.IsbnVerify;
 import book.IsbnVerifyProxy;
 import javaee.book.dao.BookDao;
 import javaee.book.entity.BookBook;
-import javaee.book.entity.BookBookReq;
+import javaee.book.entity.req.BookBookReq;
 
 import javax.ejb.Stateless;
 import java.rmi.RemoteException;
