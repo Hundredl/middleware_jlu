@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -35,5 +33,15 @@ public class BookUser {
      * 用户类型:0admin;1user
      */
     private Integer userType;
+
+    @OneToMany(cascade = { CascadeType.ALL },mappedBy="user")
+    private List<BookOrder> orderList;
+
+    public BookUser(Integer userId, String userName, String password, Integer userType) {
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+        this.userType = userType;
+    }
 }
 
