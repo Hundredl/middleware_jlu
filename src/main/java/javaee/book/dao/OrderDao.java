@@ -2,6 +2,7 @@ package javaee.book.dao;
 
 import javaee.book.entity.BookBook;
 import javaee.book.entity.BookOrder;
+import javaee.book.entity.BookUser;
 
 import javax.persistence.*;
 import java.util.Arrays;
@@ -30,5 +31,13 @@ public class OrderDao {
         entityManager.persist(bookOrder);
         transaction.commit();
         entityManager.close();
+    }
+    public List<BookOrder> selectByUserId(Integer userId)
+    {
+        EntityManager entityManager = emf.createEntityManager();
+        Query query = entityManager.createNativeQuery(String.format("select * from BOOKORDER where userId='%s'",userId), BookOrder.class);
+        List<BookOrder> result = query.getResultList();
+        entityManager.close();
+        return result;
     }
 }
