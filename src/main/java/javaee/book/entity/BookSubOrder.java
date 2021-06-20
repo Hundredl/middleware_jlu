@@ -24,14 +24,14 @@ public class BookSubOrder implements Serializable {
     /**
      * 订单
      */
-    @ManyToOne(cascade = { CascadeType.ALL },optional=false)
+    @ManyToOne(cascade = { CascadeType.REFRESH },optional=false)
     @JoinColumn(name = "orderId", referencedColumnName = "orderId")
     private BookOrder bookOrder;
 
     /**
      * 图书
      */
-    @ManyToOne(cascade = { CascadeType.ALL },optional=false)
+    @ManyToOne(cascade = { CascadeType.REFRESH },optional=false)
     @JoinColumn(name = "bookId", referencedColumnName = "bookId")
     private BookBook bookBook;
 

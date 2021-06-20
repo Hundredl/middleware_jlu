@@ -109,4 +109,26 @@ public class BookDao {
             return result.get(0);
         }
     }
+
+    public void update(BookBook bookBook)
+    {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.merge(bookBook);
+        transaction.commit();
+        em.close();
+    }
+    public void updateBatch(List<BookBook> bookList)
+    {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        for (BookBook book:bookList)
+        {
+            em.merge(book);
+        }
+        transaction.commit();
+        em.close();
+    }
 }

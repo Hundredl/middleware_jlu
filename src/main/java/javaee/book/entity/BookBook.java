@@ -65,7 +65,7 @@ public class BookBook implements Serializable {
     /**
      * 子订单
      */
-    @OneToMany(cascade = { CascadeType.ALL },mappedBy="bookBook")
+    @OneToMany(cascade = { CascadeType.REFRESH },mappedBy="bookBook")
     private List<BookSubOrder> subOrderList= new ArrayList<>();
 
     public BookBook(Integer bookId, String name, String isbn, String author, Date publishTime, Double price, String category, Integer count) {

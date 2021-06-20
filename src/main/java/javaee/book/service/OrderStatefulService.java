@@ -66,7 +66,7 @@ public class OrderStatefulService {
                 BookSubOrder bookSubOrder=new BookSubOrder();
                 bookSubOrder.setBookBook(book);
                 bookSubOrder.setNum(num);
-                bookSubOrder.setPrice(getBookPrice(book));
+                bookSubOrder.setPrice(getBookPrice(book)*num);
                 subOrderList.add(bookSubOrder);
             }
         }
@@ -80,12 +80,41 @@ public class OrderStatefulService {
      * @throws InvocationTargetException 异常
      * @throws IllegalAccessException 异常
      */
-    public void save(Integer userId ,BookOrder bookOrderInfo) throws InvocationTargetException, IllegalAccessException {
-        BookOrder bookOrder=new BookOrder();
-        BeanUtils.copyProperties(bookOrder,bookOrderInfo);
+    public Integer save(Integer userId ,BookOrder bookOrderInfo) {
+        //书籍的数量
+        List<BookBook> bookList=new LinkedList<>();
+        for (BookSubOrder subOrder:subOrderList)
+        {
+            Integer countOld=subOrder.getBookBook().getCount();
+            Integer countNew=countOld-subOrder.getNum();
+            if (countNew<0)
+            {
+                return -1;
+            }
+            subOrder.getBookBook().setCount(countNew);
+            bookList.add(subOrder.getBookBook());
+        }
+        bookDao.updateBatch(bookList);
+        //设置用户
         BookUser user=userDao.selectById(userId);
-        bookOrder.setUser(user);
-        orderDao.insert(bookOrder);
+        bookOrderInfo.setUser(user);
+        //计算总钱数
+        Double sum= (double) 0;
+        for (BookSubOrder subOrder:subOrderList)
+        {
+            sum+=subOrder.getPrice();
+        }
+        bookOrderInfo.setTotal(sum);
+        //设置子订单
+        bookOrderInfo.setSubOrderList(subOrderList);
+        for (BookSubOrder subOrder:subOrderList)
+        {
+            subOrder.setBookOrder(bookOrderInfo);
+        }
+        //插入
+        orderDao.insert(bookOrderInfo);
+        subOrderList.clear();
+        return 0;
     }
 
     public List<BookSubOrder> getSubOrderList()

@@ -52,7 +52,7 @@ public class BookOrder implements Serializable {
      */
     private Double total;
 
-    @ManyToOne(cascade={CascadeType.ALL})
+    @ManyToOne(cascade={CascadeType.REFRESH})
     @JoinColumn(name="userId")
     private BookUser user;//一个订单对应一个user
 

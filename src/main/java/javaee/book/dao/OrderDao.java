@@ -3,10 +3,7 @@ package javaee.book.dao;
 import javaee.book.entity.BookBook;
 import javaee.book.entity.BookOrder;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,7 +25,10 @@ public class OrderDao {
     public void insert(BookOrder bookOrder)
     {
         EntityManager entityManager = emf.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
         entityManager.persist(bookOrder);
+        transaction.commit();
         entityManager.close();
     }
 }
