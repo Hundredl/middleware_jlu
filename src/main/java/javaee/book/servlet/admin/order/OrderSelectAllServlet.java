@@ -1,4 +1,4 @@
-package javaee.book.servlet.user.order;
+package javaee.book.servlet.admin.order;
 
 import javaee.book.entity.BookOrder;
 import javaee.book.service.OrderStatefulService;
@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-@WebServlet(name = "OrderSelectAllServlet" , value = "/book/user/order/selectAll")
+@WebServlet(name = "OrderSelectAllServlet" , value = "/book/admin/order/selectAll")
 public class OrderSelectAllServlet extends HttpServlet {
     @EJB
     OrderStatefulService orderService;
@@ -26,7 +26,6 @@ public class OrderSelectAllServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json;charset=UTF-8");
         List<BookOrder> orderList=orderService.selectAll();
-        System.out.println(Arrays.toString(orderList.toArray()));
-        ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_search_result, OrderUtils.getBookOrderRespList(orderList));
+        ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_search_result, OrderUtils.getBookOrderWithSubOrderList(orderList));
     }
 }
