@@ -18,7 +18,13 @@ targetCompatibility = 1.7
 
 dependencies {
 //    compile(files('lib/eclipselink/jlib/jpa/javax.persistence_2.1.0.v201304241213.jar'))
-    compile(files('lib/jboss-client.jar'))
+    implementation(files('lib/jboss-client.jar'))
+    implementation(files('lib/axis.jar'))
+    implementation(files('lib/commons-discovery-0.2.jar'))
+    implementation(files('lib/javax.wsdl_1.6.2.v201012040545.jar'))
+    implementation(files('lib/jaxrpc.jar'))
+    implementation(files('lib/org.apache.commons.logging_1.1.1.v201101211721.jar'))
+    implementation(files('lib/saaj.jar'))
 //    compile(files('lib/eclipselink/jlib/eclipselink.jar'))
     implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.26'
     compileOnly('javax:javaee-web-api:8.0.1')
@@ -39,6 +45,25 @@ dependencies {
 
     // https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils
     implementation group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
+
+//    // https://mvnrepository.com/artifact/org.apache.axis/axis
+//    implementation group: 'org.apache.axis', name: 'axis', version: '1.4'
+//
+//    // https://mvnrepository.com/artifact/javax.xml.rpc/javax.xml.rpc-api
+//    implementation group: 'javax.xml.rpc', name: 'javax.xml.rpc-api', version: '1.1.1'
+//
+//    // https://mvnrepository.com/artifact/commons-discovery/commons-discovery
+//    implementation group: 'commons-discovery', name: 'commons-discovery', version: '0.2'
+//
+//    // https://mvnrepository.com/artifact/axis/axis-wsdl4j
+//    implementation group: 'axis', name: 'axis-wsdl4j', version: '1.5.1'
+//
+//    // https://mvnrepository.com/artifact/javax.xml.soap/saaj-api
+//    implementation group: 'javax.xml.soap', name: 'saaj-api', version: '1.3.1'
+//
+//    // https://mvnrepository.com/artifact/javax.activation/activation
+//    implementation group: 'javax.activation', name: 'activation', version: '1.1.1'
+
 
 
 
