@@ -24,6 +24,7 @@ public class GlobalVar {
         book_isbn_verify,//isbn验证
         book_order_insert_temp_success,book_order_insert_temp_save,book_order_insert_temp_save_failure,//订单
         book_order_select_by_user_id,//用户通过id查询订单
+        book_order_select_by_book_id,
         wrong_param,//错误的参数
     }
 }

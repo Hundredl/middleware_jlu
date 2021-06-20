@@ -14,18 +14,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-@WebServlet(name = "OrderSelectAllServlet" , value = "/book/admin/order/selectAll")
-public class OrderSelectAllServlet extends HttpServlet {
+@WebServlet(name = "OrderSelectByBookServlet" , value = "/book/admin/order/selectByBookId")
+public class OrderSelectByBookServlet extends HttpServlet {
     @EJB
-    OrderStatefulService orderService;
+    OrderStatefulService orderStatefulService;
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json;charset=UTF-8");
-        List<BookOrder> orderList=orderService.selectAll();
-        ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_search_result, OrderUtils.getBookOrderFullRespList(orderList));
+        Map<?,?> params= ServletUtils.getPostParams(req);
+        if (params.get("bookId")==null)
+        {
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.wrong_param,null);
+        }
+        Integer bookId = Integer.parseInt(params.get("bookId").toString());
+        List<BookOrder> bookOrderList = orderStatefulService.selectByBookId(bookId);
+        ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_order_select_by_book_id, OrderUtils.getBookOrderFullRespList(bookOrderList));
     }
 }

@@ -2,11 +2,11 @@ package javaee.book.dao;
 
 import javaee.book.entity.BookBook;
 import javaee.book.entity.BookOrder;
+import javaee.book.entity.BookSubOrder;
 import javaee.book.entity.BookUser;
 
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class OrderDao {
     private static final EntityManagerFactory emf;
@@ -39,5 +39,21 @@ public class OrderDao {
         List<BookOrder> result = query.getResultList();
         entityManager.close();
         return result;
+    }
+    public List<BookOrder> selectByBookId(Integer bookId)
+    {
+        EntityManager entityManager = emf.createEntityManager();
+        Query query = entityManager.createNativeQuery(String.format("select * from BOOKSUBORDER where bookId='%s'",bookId), BookSubOrder.class);
+        List<BookSubOrder> bookSubOrderList = query.getResultList();
+        List<BookOrder> bookOrderList=new LinkedList<>();
+        for (BookSubOrder bookSubOrder:bookSubOrderList)
+        {
+            if (!bookOrderList.contains(bookSubOrder))
+            {
+                bookOrderList.add(bookSubOrder.getBookOrder());
+            }
+        }
+        entityManager.close();
+        return bookOrderList;
     }
 }

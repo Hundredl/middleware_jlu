@@ -126,6 +126,11 @@ public class OrderStatefulService {
     {
         return orderDao.selectByUserId(userId);
     }
+
+    public List<BookOrder> selectByBookId(Integer bookId)
+    {
+        return orderDao.selectByBookId(bookId);
+    }
     @Remove
     public void remove()
     {

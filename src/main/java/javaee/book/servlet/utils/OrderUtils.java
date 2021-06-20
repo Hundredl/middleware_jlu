@@ -2,13 +2,11 @@ package javaee.book.servlet.utils;
 
 import javaee.book.entity.BookOrder;
 import javaee.book.entity.BookSubOrder;
-import javaee.book.entity.resp.BookBookResp;
-import javaee.book.entity.resp.BookOrderResp;
-import javaee.book.entity.resp.BookOrderWithSubOrder;
-import javaee.book.entity.resp.BookSubOrderWithBook;
+import javaee.book.entity.resp.*;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -113,5 +111,45 @@ public class OrderUtils {
             bookSubOrderWithBookList.add(bookSubOrderWithBook);
         }
         return bookSubOrderWithBookList;
+    }
+
+
+    /**
+     * 取得全部订单的全部信息
+     * @param bookOrderList  订单信息
+     * @return 订单信息
+     * @throws InvocationTargetException 异常
+     * @throws IllegalAccessException 异常
+     */
+    public static List<BookOrderFullResp> getBookOrderFullRespList(List<BookOrder> bookOrderList) throws InvocationTargetException, IllegalAccessException {
+
+        List<BookOrderFullResp> bookOrderFullRespList = new ArrayList<>();
+        for (BookOrder bookOrder:bookOrderList)
+        {
+            BookOrderFullResp bookOrderFullResp = getBookOrderFullResp(bookOrder);
+            bookOrderFullRespList.add(bookOrderFullResp);
+        }
+        return bookOrderFullRespList;
+    }
+
+    /**
+     * 取得一个订单的全部信息
+     * @param bookOrder 订单信息
+     * @return 订单信息
+     * @throws InvocationTargetException 异常
+     * @throws IllegalAccessException 异常
+     */
+    public static BookOrderFullResp getBookOrderFullResp(BookOrder bookOrder) throws InvocationTargetException, IllegalAccessException {
+
+        //拷贝其余订单信息
+        BookOrderWithSubOrder bookOrderWithSubOrder=getBookOrderWithSubOrder(bookOrder);
+        BookOrderFullResp bookOrderFullResp=new BookOrderFullResp();
+        BeanUtils.copyProperties(bookOrderFullResp,bookOrderWithSubOrder);
+        //拷贝用户信息
+        BookUserResp bookUserResp=new BookUserResp();
+        BeanUtils.copyProperties(bookUserResp,bookOrder.getUser());
+        bookOrderFullResp.setUser(bookUserResp);
+        return bookOrderFullResp;
+
     }
 }
