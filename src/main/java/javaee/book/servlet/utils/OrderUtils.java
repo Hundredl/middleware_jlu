@@ -1,5 +1,6 @@
 package javaee.book.servlet.utils;
 
+import com.alibaba.fastjson.JSON;
 import javaee.book.entity.BookOrder;
 import javaee.book.entity.BookSubOrder;
 import javaee.book.entity.resp.*;
@@ -151,5 +152,14 @@ public class OrderUtils {
         bookOrderFullResp.setUser(bookUserResp);
         return bookOrderFullResp;
 
+    }
+
+    /**
+     * @param order 订单信息
+     * @return 订单的json信息
+     */
+    public static String getOrderMessage(BookOrderWithSubOrder order)
+    {
+        return JSON.toJSON(order).toString();
     }
 }

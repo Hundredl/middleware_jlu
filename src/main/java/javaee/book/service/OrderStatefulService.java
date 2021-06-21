@@ -113,7 +113,6 @@ public class OrderStatefulService {
         }
         //插入
         orderDao.insert(bookOrderInfo);
-        subOrderList.clear();
         return 0;
     }
 

@@ -1,7 +1,11 @@
 package javaee.book.mdb;
 
+import javaee.book.service.OrderService;
+import javaee.book.utils.MDBUtils;
+
 import javax.annotation.Resource;
 import javax.ejb.ActivationConfigProperty;
+import javax.ejb.EJB;
 import javax.ejb.MessageDriven;
 import javax.ejb.MessageDrivenContext;
 import javax.jms.JMSException;
@@ -20,6 +24,8 @@ public class PubSubMDB implements MessageListener {
 
     @Resource
     private MessageDrivenContext mdc;
+    @EJB
+    private OrderService orderService;
     public PubSubMDB() {
     }
     public void onMessage(Message inMessage) {
@@ -28,6 +34,7 @@ public class PubSubMDB implements MessageListener {
             if (inMessage instanceof TextMessage) {
                 msg = (TextMessage) inMessage;
                 System.out.println("PubSub消息驱动Bean 1 接收到的消息:" + msg.getText());
+                orderService.writeToFile(null,msg.getText());
             }
             else {
                 System.out.println("消息的类型不正确： " + inMessage.getClass().getName());
