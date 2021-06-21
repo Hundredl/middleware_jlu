@@ -27,10 +27,10 @@ public class OrderSelectByBookServlet extends HttpServlet {
         Map<?,?> params= ServletUtils.getPostParams(req);
         if (params.get("bookId")==null)
         {
-            ServletUtils.returnResp(resp, GlobalVar.RespMsg.wrong_param,null);
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure,null);
         }
         Integer bookId = Integer.parseInt(params.get("bookId").toString());
         List<BookOrder> bookOrderList = orderStatefulService.selectByBookId(bookId);
-        ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_order_select_by_book_id, OrderUtils.getBookOrderFullRespList(bookOrderList));
+        ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, OrderUtils.getBookOrderFullRespList(bookOrderList));
     }
 }

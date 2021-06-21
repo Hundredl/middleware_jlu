@@ -30,6 +30,6 @@ public class BookSelectAndServlet extends HttpServlet {
         Map<?,?> params= ServletUtils.getPostParams(req);
         BookBookReq bookBookReq= JSONObject.toJavaObject((JSONObject)params.get("bookFilter"),BookBookReq.class);
         List<BookBook> result=bookService.selectAnd(bookBookReq);
-        ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_select_and, BookUtils.getBookBookReqList(result));
+        ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, BookUtils.getBookBookReqList(result));
     }
 }

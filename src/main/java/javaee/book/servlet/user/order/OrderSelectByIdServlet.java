@@ -28,6 +28,6 @@ public class OrderSelectByIdServlet extends HttpServlet {
         Map<?,?> params= ServletUtils.getPostParams(req);
         Integer userId=3;
         List<BookOrder> bookOrderList=orderStatefulService.selectByUserId(userId);
-        ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_order_select_by_user_id, OrderUtils.getBookOrderWithSubOrderList(bookOrderList));
+        ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, OrderUtils.getBookOrderWithSubOrderList(bookOrderList));
     }
 }

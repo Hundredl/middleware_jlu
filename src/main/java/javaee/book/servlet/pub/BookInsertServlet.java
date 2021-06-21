@@ -26,6 +26,6 @@ public class BookInsertServlet extends HttpServlet {
 
         BookBook bookBook= JSONObject.toJavaObject((JSONObject)params.get("book"),BookBook.class);
         bookService.insert(bookBook);
-        ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_insert_success,bookBook);
+        ServletUtils.returnResp(resp, GlobalVar.RespMsg.success,bookBook);
     }
 }

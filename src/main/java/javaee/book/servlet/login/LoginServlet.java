@@ -32,11 +32,11 @@ public class LoginServlet extends HttpServlet {
             BookUserResp bookUserResp=new BookUserResp();
             BeanUtils.copyProperties(bookUserResp,bookUser);
             req.getSession().setAttribute("user",bookUserResp);
-            ServletUtils.returnResp(resp, GlobalVar.RespMsg.login_success,bookUserResp);
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.success,bookUserResp);
         }
         else {
             //PageTurn.turnToPage(req,resp, PageTurn.PageName.toLogin);
-            ServletUtils.returnResp(resp, GlobalVar.RespMsg.login_failure,null);
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure,null);
 
         }
     }

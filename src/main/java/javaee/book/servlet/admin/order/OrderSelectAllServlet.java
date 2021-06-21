@@ -26,6 +26,6 @@ public class OrderSelectAllServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json;charset=UTF-8");
         List<BookOrder> orderList=orderService.selectAll();
-        ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_search_result, OrderUtils.getBookOrderFullRespList(orderList));
+        ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, OrderUtils.getBookOrderFullRespList(orderList));
     }
 }

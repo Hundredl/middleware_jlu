@@ -27,6 +27,6 @@ public class BookSelectAllServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("application/json;charset=UTF-8");
         List<BookBook> result=bookService.selectAll();
-        ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_search_result, BookUtils.getBookBookReqList(result));
+        ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, BookUtils.getBookBookReqList(result));
     }
 }

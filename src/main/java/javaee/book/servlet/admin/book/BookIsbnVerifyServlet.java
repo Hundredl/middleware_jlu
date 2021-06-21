@@ -28,9 +28,9 @@ public class BookIsbnVerifyServlet extends HttpServlet {
             String isbn=null;
             isbn=bookService.isbnVerify(isbnRaw);
             isbn=(isbn==null)?"wrong":isbn;//如果为null则返回wrong
-            ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_isbn_verify,new BookIsbnVerifyReq(isbn));
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.success,new BookIsbnVerifyReq(isbn));
         }else {
-            ServletUtils.returnResp(resp, GlobalVar.RespMsg.wrong_param,null);
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure,null);
         }
 
     }

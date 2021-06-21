@@ -50,7 +50,7 @@ public class OrderInsertTemporarilyServlet extends HttpServlet {
         params= ServletUtils.getPostParams(req);
         if (params.get("option")==null)
         {
-            ServletUtils.returnResp(resp, GlobalVar.RespMsg.wrong_param,null);
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure,null);
             return;
         }
         String option=params.get("option").toString();
@@ -66,7 +66,7 @@ public class OrderInsertTemporarilyServlet extends HttpServlet {
                 print(req, resp);
                 break;
             default:
-                ServletUtils.returnResp(resp, GlobalVar.RespMsg.wrong_param,null);
+                ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure,null);
         }
 
     }
@@ -76,11 +76,11 @@ public class OrderInsertTemporarilyServlet extends HttpServlet {
         Integer num = params.get("num")==null?null:Integer.parseInt(params.get("num").toString());
         if (bookId==null||num==null)
         {
-            ServletUtils.returnResp(resp, GlobalVar.RespMsg.wrong_param,null);
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure,null);
             return;
         }
         orderStatefulService.addToSubOrderList(bookId,num);
-        ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_order_insert_temp_success, OrderUtils.getBookSubOrderWithBookList(orderStatefulService.getSubOrderList()));
+        ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, OrderUtils.getBookSubOrderWithBookList(orderStatefulService.getSubOrderList()));
 
     }
     private void save(HttpServletRequest req, HttpServletResponse resp) throws IOException, InvocationTargetException, IllegalAccessException {
@@ -89,7 +89,7 @@ public class OrderInsertTemporarilyServlet extends HttpServlet {
         BookOrder bookOrder= JSONObject.toJavaObject((JSONObject) params.get("orderInfo"),BookOrder.class);
         if (bookOrder == null)
         {
-            ServletUtils.returnResp(resp, GlobalVar.RespMsg.wrong_param,null);
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure,null);
         }
         System.out.println(bookOrder+"--------------------------------------------------------------");
         assert bookOrder != null;
@@ -97,11 +97,11 @@ public class OrderInsertTemporarilyServlet extends HttpServlet {
         if (result<0)
         {
             //说明书籍数量不够了
-            ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_order_insert_temp_save_failure, OrderUtils.getBookSubOrderWithBookList(orderStatefulService.getSubOrderList()));
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure, OrderUtils.getBookSubOrderWithBookList(orderStatefulService.getSubOrderList()));
         }
         else {
             //书籍数量足够
-            ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_order_insert_temp_save, OrderUtils.getBookSubOrderWithBookList(orderStatefulService.getSubOrderList()));
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, OrderUtils.getBookSubOrderWithBookList(orderStatefulService.getSubOrderList()));
         }
     }
     public void print(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -134,11 +134,7 @@ public class OrderInsertTemporarilyServlet extends HttpServlet {
             // 等待30秒退出
             CountDownLatch latch = new CountDownLatch(1);
             latch.await(30, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (NamingException e) {
-            e.printStackTrace();
-        } catch (JMSException e) {
+        } catch (InterruptedException | NamingException | JMSException e) {
             e.printStackTrace();
         }
     }

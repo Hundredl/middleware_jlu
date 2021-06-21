@@ -34,10 +34,10 @@ public class SignUpServlet extends HttpServlet {
             userService.add(bookUser);
             BookUserResp bookUserResp = new BookUserResp();
             BeanUtils.copyProperties(bookUserResp,bookUser);
-            ServletUtils.returnResp(resp, GlobalVar.RespMsg.signup_success,bookUserResp);
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.success,bookUserResp);
         }
         else {
-            ServletUtils.returnResp(resp, GlobalVar.RespMsg.signup_failure,null);
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure,null);
         }
     }
 }

@@ -32,25 +32,25 @@ public class BookInsertTemporarilyServlet extends HttpServlet {
         switch (option) {
             case "insertTemporarily":
                 insertTemporarily(bookList);
-                ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_insert_temporarily_select, bookStatefulServiceRemote.getInsertSaveTemporarilyBookList());
+                ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, bookStatefulServiceRemote.getInsertSaveTemporarilyBookList());
                 break;
             case "insertTemporarilySave":
                 insertTemporarilySave();
-                ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_insert_temporarily_save, null);
+                ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, null);
                 break;
             case "insertTemporarilySelect":
-                ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_insert_temporarily_select, bookStatefulServiceRemote.getInsertSaveTemporarilyBookList());
+                ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, bookStatefulServiceRemote.getInsertSaveTemporarilyBookList());
                 break;
             case "insertTemporarilyUpdate":
                 insertTemporarilyUpdate(bookList);
-                ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_insert_temporarily_update, bookStatefulServiceRemote.getInsertSaveTemporarilyBookList());
+                ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, bookStatefulServiceRemote.getInsertSaveTemporarilyBookList());
                 break;
             case "insertTemporarilyUpdateOne":
                 insertTemporarilyUpdateOne(bookList);
-                ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_insert_temporarily_update, bookStatefulServiceRemote.getInsertSaveTemporarilyBookList());
+                ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, bookStatefulServiceRemote.getInsertSaveTemporarilyBookList());
                 break;
             default:
-                ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_insert_temporarily_invalid_option, bookStatefulServiceRemote.getInsertSaveTemporarilyBookList());
+                ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure, bookStatefulServiceRemote.getInsertSaveTemporarilyBookList());
                 break;
         }
     }
