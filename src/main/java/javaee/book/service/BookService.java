@@ -5,6 +5,7 @@ import book.IsbnVerifyProxy;
 import javaee.book.dao.BookDao;
 import javaee.book.entity.BookBook;
 import javaee.book.entity.req.BookBookReq;
+import javaee.book.utils.IsbnUtil;
 
 import javax.ejb.Stateless;
 import java.rmi.RemoteException;
@@ -33,13 +34,7 @@ public class BookService {
      */
     public String isbnVerify(String isbnRaw)
     {
-        String isbn="wrong";
-        try {
-            IsbnVerify service = new IsbnVerifyProxy();
-            isbn=service.isbnVerify("isbnRaw");
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        return isbn;
+        System.out.println("isbnVerify"+IsbnUtil.getIsbn13(isbnRaw));
+        return IsbnUtil.getIsbn13(isbnRaw);
     }
 }

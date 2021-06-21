@@ -1,7 +1,9 @@
 package javaee;
 
-import book.IsbnVerify;
+/*import book.IsbnVerify;
 import book.IsbnVerifyProxy;
+import javaee.bigws.HelloWS;
+import javaee.bigws.HelloWSProxy;*/
 
 import java.rmi.RemoteException;
 
@@ -10,11 +12,11 @@ public class HelloWorldClient {
       //bookIsbnVerify.IsbnVerify service = new IsbnVerifyService().getIsbnVerifyPort();
       //invoke business method
       //System.out.println(service.isbnVerify("test"));
-      try {
-          IsbnVerify service = new IsbnVerifyProxy();
-          System.out.println(service.isbnVerify("a teacher"));
+      /*try {
+          HelloWS service = new HelloWSProxy();
+          System.out.println(service.sayHelloWS("a teacher!!!!"));
       } catch (RemoteException e) {
           e.printStackTrace();
-      }
+      }*/
   }
 }

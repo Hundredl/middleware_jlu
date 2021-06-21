@@ -22,15 +22,16 @@ public class BookIsbnVerifyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("application/json;charset=UTF-8");
         Map<?,?> params= ServletUtils.getPostParams(req);
-        System.out.println(params);
         String isbnRaw=params.get("isbnRaw")==null?null:params.get("isbnRaw").toString();
-        String isbn;
         if (isbnRaw!=null)
         {
+            String isbn=null;
             isbn=bookService.isbnVerify(isbnRaw);
+            isbn=(isbn==null)?"wrong":isbn;//如果为null则返回wrong
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_isbn_verify,new BookIsbnVerifyReq(isbn));
         }else {
-            isbn="wrong";
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.wrong_param,null);
         }
-        ServletUtils.returnResp(resp, GlobalVar.RespMsg.book_isbn_verify,new BookIsbnVerifyReq(isbn));
+
     }
 }
