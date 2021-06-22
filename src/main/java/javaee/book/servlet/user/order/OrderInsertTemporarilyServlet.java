@@ -79,7 +79,7 @@ public class OrderInsertTemporarilyServlet extends HttpServlet {
         ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, OrderUtils.getBookSubOrderWithBookList(orderStatefulService.getSubOrderList()));
 
     }
-    private void save(HttpServletRequest req, HttpServletResponse resp) throws IOException, InvocationTargetException, IllegalAccessException, ServletException {
+    private void save(HttpServletRequest req, HttpServletResponse resp) throws IOException, InvocationTargetException, IllegalAccessException {
         BookUserResp user=(BookUserResp) req.getSession().getAttribute("user");
         Integer userId=3;
         BookOrder bookOrder= JSONObject.toJavaObject((JSONObject) params.get("orderInfo"),BookOrder.class);
@@ -104,17 +104,17 @@ public class OrderInsertTemporarilyServlet extends HttpServlet {
             ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, OrderUtils.getBookSubOrderWithBookList(orderStatefulService.getSubOrderList()));
         }
     }
-    public void print(String message) throws IOException, ServletException {
-        Context context = null;
-        Connection connection = null;
+    public void print(String message){
+        Context context;
+        Connection connection;
         try {
             // 设置上下文
-            System.out.println("设置JNDI访问环境信息也就是设置应用服务器的上下文信息!");
+            //System.out.println("设置JNDI访问环境信息也就是设置应用服务器的上下文信息!");
             // 获取到InitialContext对象.
             context = new InitialContext();
-            System.out.println("获取连接工厂!");
+            //System.out.println("获取连接工厂!");
             ConnectionFactory connectionFactory = (ConnectionFactory) context.lookup(DEFAULT_CONNECTION_FACTORY);
-            System.out.println("获取目的地!");
+            //System.out.println("获取目的地!");
             Destination destination = (Destination) context.lookup(DEFAULT_DESTINATION);
             // 创建JMS连接、会话、生产者和消费者
             connection = connectionFactory.createConnection(DEFAULT_USERNAME, DEFAULT_PASSWORD);
@@ -123,11 +123,11 @@ public class OrderInsertTemporarilyServlet extends HttpServlet {
             connection.start();
             int count = Integer.parseInt(DEFAULT_MESSAGE_COUNT);
             // 发送特定数目的消息
-            TextMessage messageToSend = null;
+            TextMessage messageToSend;
             messageToSend = session.createTextMessage(message);
             producer.send(messageToSend);
             connection.close();
-            System.out.println("message:" + message);
+            //System.out.println("message:" + message);
             // 等待30秒退出
             /*CountDownLatch latch = new CountDownLatch(1);
             latch.await(30, TimeUnit.SECONDS);*/

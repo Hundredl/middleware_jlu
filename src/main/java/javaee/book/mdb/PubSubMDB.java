@@ -1,6 +1,7 @@
 package javaee.book.mdb;
 
 import javaee.book.service.OrderService;
+import javaee.book.utils.GlobalVar;
 import javaee.book.utils.MDBUtils;
 
 import javax.annotation.Resource;
@@ -12,6 +13,9 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 //设置消息驱动Bean监听的目的类型为Topic、目的地址为topic/test、可持久性存储消息以及用户ID
 @MessageDriven(activationConfig =  {
@@ -29,12 +33,12 @@ public class PubSubMDB implements MessageListener {
     public PubSubMDB() {
     }
     public void onMessage(Message inMessage) {
-        TextMessage msg = null;
+        TextMessage msg;
         try {
             if (inMessage instanceof TextMessage) {
                 msg = (TextMessage) inMessage;
-                System.out.println("PubSub消息驱动Bean 1 接收到的消息:" + msg.getText());
-                orderService.writeToFile(null,msg.getText());
+                //System.out.println("PubSub消息驱动Bean 1 接收到的消息:" + msg.getText());
+                orderService.writeToFile(GlobalVar.orderOutPath,msg.getText());
             }
             else {
                 System.out.println("消息的类型不正确： " + inMessage.getClass().getName());
