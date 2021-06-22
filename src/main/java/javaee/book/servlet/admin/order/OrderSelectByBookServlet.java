@@ -28,6 +28,7 @@ public class OrderSelectByBookServlet extends HttpServlet {
         if (params.get("bookId")==null)
         {
             ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure,null);
+            return;
         }
         Integer bookId = Integer.parseInt(params.get("bookId").toString());
         List<BookOrder> bookOrderList = orderStatefulService.selectByBookId(bookId);

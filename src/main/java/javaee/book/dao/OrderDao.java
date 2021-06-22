@@ -48,7 +48,7 @@ public class OrderDao {
         List<BookOrder> bookOrderList=new LinkedList<>();
         for (BookSubOrder bookSubOrder:bookSubOrderList)
         {
-            if (!bookOrderList.contains(bookSubOrder))
+            if (!bookOrderList.contains(bookSubOrder.getBookOrder()))
             {
                 bookOrderList.add(bookSubOrder.getBookOrder());
             }
