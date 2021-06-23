@@ -26,7 +26,11 @@ public class OrderSelectByIdServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<?,?> params= ServletUtils.getPostParams(req);
-        Integer userId=3;
+        if (params.get("userId")==null)
+        {
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure,null);
+        }
+        Integer userId=Integer.parseInt(params.get("userId").toString());
         List<BookOrder> bookOrderList=orderStatefulService.selectByUserId(userId);
         ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, OrderUtils.getBookOrderWithSubOrderList(bookOrderList));
     }

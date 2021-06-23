@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <title>GoBooks | 图书查询</title>
+    <title>GoBooks</title>
 </head>
 <body>
 <div id="app">
@@ -195,9 +195,78 @@
                     </table>
                 </div>
                 <div id="orderPage" v-if="orderPage">
-                    <h1>订单页面</h1>
-                </div>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">订单id</th>
+                            <th scope="col">收件人</th>
+                            <th scope="col">电话</th>
+                            <th scope="col">配送时间</th>
+                            <th scope="col">配送地址</th>
+                            <th scope="col">总价</th>
+                            <th scope="col">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="item in orderList" :key="item.orderId">
+                            <th scope="row">{{item.orderId}}</th>
+                            <td>{{item.receiverName}}</td>
+                            <td>{{item.tel}}</td>
+                            <td>{{item.deliveryTime}}</td>
+                            <td>{{item.address}}</td>
+                            <td>{{item.total}}</td>
+                            <td>
+                                <div @click="orderDetailClicked(item.orderId)"
+                                     class="btn btn-outline-primary btn-sm" >
+                                    详细信息
+                                </div>
+                            </td>
+                        </tr>
 
+                        </tbody>
+                    </table>
+
+                </div>
+                <div id="orderDetailPage" v-if="orderDetailPage">
+                    <div class="row row-cols-auto">
+                        <div class="col">
+                            <input type="button" class="btn btn-primary mb-3 btn-sm" value="返回" @click="orderDetailReturn">
+                        </div>
+                        <div class="col btn-sm">订单id:{{curDetailOrder.orderId}}</div>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">图书id</th>
+                            <th scope="col">图书名称</th>
+                            <th scope="col">书号</th>
+                            <th scope="col">作者</th>
+                            <th scope="col">类别</th>
+                            <th scope="col">出版时间</th>
+                            <th scope="col">价格</th>
+                            <th scope="col">库存</th>
+                            <th scope="col">购买数量</th>
+                            <th scope="col">总价</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="item in curDetailOrder.subOrderList" :key="item.subOrderId">
+                            <th scope="row">{{item.book.bookId}}</th>
+                            <td>{{item.book.name}}</td>
+                            <td>{{item.book.isbn}}</td>
+                            <td>{{item.book.author}}</td>
+                            <td>{{item.book.category}}</td>
+                            <td>{{item.book.publishTime}}</td>
+                            <td>{{item.book.price}}</td>
+                            <td>{{item.book.count}}</td>
+                            <td>{{item.num}}</td>
+                            <td>{{item.price}}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -239,6 +308,11 @@
             receiverName:'',
             tel:'',
 
+            //订单页面
+            orderList:[],
+            //订单详情页面
+            curDetailOrder:{},
+
 
             tips:'',//提示信息
             toastShow:false,
@@ -246,7 +320,7 @@
             bookSearchPage:true,
             cartPage:false,
             orderPage:false,
-            subOrderPage:false,
+            orderDetailPage:false,
 
             user:{'userId':1,'username':'333',userType:1}
 
@@ -321,7 +395,27 @@
                     this.toast("未知错误")
                 })
             },
-
+            selectOrderById()//发送请求查询订单
+            {
+                let data={
+                    'userId':this.user.userId
+                }
+                axios.post("http://localhost:8080/hello/book/user/order/selectById",data).then((response)=>{
+                    let result= response.data
+                    if (result.msg==='success')
+                    {
+                        //请求成功
+                        this.orderList=result.data;
+                        console.log(this.orderList)
+                    }
+                    else {
+                        //请求失败
+                        this.toast("订单查询失败")
+                    }
+                },(err)=>{
+                    this.toast("未知错误")
+                })
+            },
 
             //页面跳转
             bookSearchPageClicked()
@@ -329,6 +423,7 @@
                 this.bookSearchPage=true
                 this.cartPage=false
                 this.orderPage=false
+                this.orderDetailPage=false
                 this.selectBookAnd()
             },
             cartPageClicked()
@@ -336,15 +431,24 @@
                 this.bookSearchPage=false
                 this.cartPage=true
                 this.orderPage=false
+                this.orderDetailPage=false
                 this.selectSubOrder()
             },
             orderPageClicked()
             {
+                this.selectOrderById()
                 this.bookSearchPage=false
                 this.cartPage=false
                 this.orderPage=true
+                this.orderDetailPage=false
             },
-
+            orderDetailPageClicked()
+            {
+                this.bookSearchPage=false
+                this.cartPage=false
+                this.orderPage=false
+                this.orderDetailPage=true
+            },
 
 
             //书籍搜索页面
@@ -422,6 +526,26 @@
                 })
             },
 
+
+            //订单页面
+            orderDetailClicked(orderId){
+                const index = this.orderList.findIndex(function (item, i, arr) {
+                    return item.orderId === orderId
+                })
+                if (index!==-1)//已经有了
+                {
+                    this.curDetailOrder=this.orderList[index];
+                }
+                else {//还没有，加入
+                    this.toast("订单不存在")
+                }
+                this.orderDetailPageClicked()
+            },
+            //订单详情
+            orderDetailReturn()//返回订单界面
+            {
+                this.orderPageClicked()
+            },
             toast(msg)
             {
                 this.toastShow=true;
