@@ -29,6 +29,7 @@ public class BookSelectAndServlet extends HttpServlet {
         resp.setContentType("application/json;charset=UTF-8");
         Map<?,?> params= ServletUtils.getPostParams(req);
         BookBookReq bookBookReq= JSONObject.toJavaObject((JSONObject)params.get("bookFilter"),BookBookReq.class);
+        System.out.println(bookBookReq);
         List<BookBook> result=bookService.selectAnd(bookBookReq);
         ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, BookUtils.getBookBookReqList(result));
     }

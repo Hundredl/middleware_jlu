@@ -42,13 +42,29 @@ public class BookDao {
         Query query = entityManager.createNativeQuery("select * from BOOKBOOK",BookBook.class);
         List<BookBook> resultRaw = query.getResultList();
         List<BookBook> result=new LinkedList<>();
+        if (bookBookReq.getName().isEmpty())
+        {
+            bookBookReq.setName(null);
+        }
+        if (bookBookReq.getIsbn().isEmpty())
+        {
+            bookBookReq.setIsbn(null);
+        }
+        if (bookBookReq.getAuthor().isEmpty())
+        {
+            bookBookReq.setAuthor(null);
+        }
+        if (bookBookReq.getCategory().isEmpty())
+        {
+            bookBookReq.setCategory(null);
+        }
         for (BookBook resultBook:resultRaw)
         {
             if (bookBookReq.getName()!=null&&resultBook.getName()!=null&&!(resultBook.getName().contains(bookBookReq.getName())))
             {
                 continue;
             }
-            if (bookBookReq.getIsbn()!=null&&resultBook.getIsbn()!=null&&bookBookReq.getIsbn().equals(resultBook.getIsbn()))
+            if (bookBookReq.getIsbn()!=null&&resultBook.getIsbn()!=null&&!bookBookReq.getIsbn().equals(resultBook.getIsbn()))
             {
                 continue;
             }

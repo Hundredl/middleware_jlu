@@ -40,20 +40,22 @@
                         <input class="form-control" id="category" placeholder="category" v-model="category">
                     </div>
                     <div class="">
-                        <label for="publishTimeBegin">最早出版时间</label>
-                        <input type="datetime-local" class="form-control" id="publishTimeBegin" placeholder="publishTimeBegin" v-model="publishTimeBegin">
-                    </div>
-                    <div class="">
-                        <label for="publishTimeEnd">最晚出版时间</label>
-                        <input type="datetime-local" class="form-control" id="publishTimeEnd" placeholder="publishTimeEnd" v-model="publishTimeEnd">
-                    </div>
-                    <div class="">
                         <label for="priceLow">最低价格</label>
                         <input type="number" class="form-control" id="priceLow" placeholder="priceLow" v-model="priceLow">
                     </div>
                     <div class="">
                         <label for="priceHigh">最高价格</label>
                         <input type="number" class="form-control" id="priceHigh" placeholder="priceHigh" v-model="priceHigh">
+                    </div>
+                </div>
+                <div class="row row-cols-2 my-4">
+                    <div class="">
+                        <label for="publishTimeBegin">最早出版时间</label>
+                        <input type="datetime-local" class="form-control" id="publishTimeBegin" placeholder="publishTimeBegin" v-model="publishTimeBegin">
+                    </div>
+                    <div class="">
+                        <label for="publishTimeEnd">最晚出版时间</label>
+                        <input type="datetime-local" class="form-control" id="publishTimeEnd" placeholder="publishTimeEnd" v-model="publishTimeEnd">
                     </div>
                 </div>
                 <div class="row">
@@ -175,9 +177,37 @@
                     this.toast("未知错误")
                 })
             },
+            selectBookAnd()//发送请求，筛选图书
+            {
+                let data={'bookFilter':{
+                        'name':this.name,
+                        'isbn':this.isbn,
+                        'author':this.author,
+                        'category':this.category,
+                        'publishTimeBegin':this.publishTimeBegin,
+                        'publishTimeEnd':this.publishTimeEnd,
+                        'priceLow':this.priceLow,
+                        'priceHigh':this.priceHigh}}
+                axios.post("http://localhost:8080/hello/book/pub/book/selectAnd",data).then((response)=>{
+                    let result=response.data;
+                    if (result.msg==='success')
+                    {
+                        this.bookList=result.data;
+                    }
+                    else {
+                        this.toast("检索失败")
+                    }
+
+                },(err)=>{
+                    this.toast("未知错误")
+                })
+            },
+
+
             searchClicked()//点击搜索
             {
-                this.toast(this.publishTimeBegin)
+                this.toast('搜索')
+                this.selectBookAnd();
             },
             addToCartClicked(bookId)//点击加入购物车
             {
