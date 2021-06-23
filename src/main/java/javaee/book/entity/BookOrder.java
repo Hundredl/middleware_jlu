@@ -34,7 +34,7 @@ public class BookOrder implements Serializable {
      * 配送时间
      */
     @Temporal(TemporalType.DATE)
-    @JSONField(format="yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-ddTHH:mm:ss")
     private Date deliveryTime;
 
     /**

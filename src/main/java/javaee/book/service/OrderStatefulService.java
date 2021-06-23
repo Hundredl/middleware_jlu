@@ -56,6 +56,7 @@ public class OrderStatefulService {
             }
             else {
                 destSubOrder.setNum(num);
+                destSubOrder.setPrice(destSubOrder.getBookBook().getPrice()*destSubOrder.getNum());
             }
         }
         else {

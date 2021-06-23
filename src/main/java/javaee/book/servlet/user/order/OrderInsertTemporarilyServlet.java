@@ -62,8 +62,8 @@ public class OrderInsertTemporarilyServlet extends HttpServlet {
                 save(req, resp);
                 break;
             case "select":
-                save(req,resp);
-                default:
+                select(req,resp);
+            default:
                 ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure,null);
         }
 
@@ -82,9 +82,14 @@ public class OrderInsertTemporarilyServlet extends HttpServlet {
 
     }
     private void save(HttpServletRequest req, HttpServletResponse resp) throws IOException, InvocationTargetException, IllegalAccessException {
-        BookUserResp user=(BookUserResp) req.getSession().getAttribute("user");
-        Integer userId=3;
+        if (params.get("userId")==null)
+        {
+            ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure,null);
+        }
+
+        Integer userId=Integer.parseInt(params.get("userId").toString());
         BookOrder bookOrder= JSONObject.toJavaObject((JSONObject) params.get("orderInfo"),BookOrder.class);
+
         if (bookOrder == null)
         {
             ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure,null);

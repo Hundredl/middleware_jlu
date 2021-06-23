@@ -44,7 +44,7 @@
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="usernameMenuLink" role="button"
-                                           data-bs-toggle="dropdown" aria-expanded="false">{{username}}
+                                           data-bs-toggle="dropdown" aria-expanded="false">{{user.userName}}
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                             <li><a class="dropdown-item" href="#">登出</a></li>
@@ -133,7 +133,61 @@
 
                 </div>
                 <div id="cartPage" v-if="cartPage">
-                    <h1>购物车页面</h1>
+                    <div class="row row-cols-6 my-1" >
+
+                        <div class="">
+                            <label for="address">地址</label>
+                            <input class="form-control" id="address" placeholder="address" v-model="address">
+                        </div>
+                        <div class="">
+                            <label for="receiverName">收件人</label>
+                            <input class="form-control" id="receiverName" placeholder="receiverName" v-model="receiverName">
+                        </div>
+                        <div class="">
+                            <label for="tel">电话</label>
+                            <input type="tel" class="form-control" id="tel" placeholder="tel" v-model="tel">
+                        </div>
+                        <div class="col-6">
+                            <label for="deliveryTime">配送时间</label>
+                            <input type="datetime-local" class="form-control" id="deliveryTime" placeholder="deliveryTime" v-model="deliveryTime">
+                        </div>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">图书id</th>
+                            <th scope="col">图书名称</th>
+                            <th scope="col">书号</th>
+                            <th scope="col">作者</th>
+                            <th scope="col">类别</th>
+                            <th scope="col">出版时间</th>
+                            <th scope="col">价格</th>
+                            <th scope="col">库存</th>
+                            <th scope="col">购买数量</th>
+                            <th scope="col">总价</th>
+                            <th scope="col">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="item in subOrderList" :key="item.book.bookId">
+                            <th scope="row">{{item.book.bookId}}</th>
+                            <td>{{item.book.name}}</td>
+                            <td>{{item.book.isbn}}</td>
+                            <td>{{item.book.author}}</td>
+                            <td>{{item.book.category}}</td>
+                            <td>{{item.book.publishTime}}</td>
+                            <td>{{item.book.price}}</td>
+                            <td>{{item.book.count}}</td>
+                            <td>{{item.num}}</td>
+                            <td>{{item.price}}</td>
+                            <td>
+                                <div @click="cartMinusClicked(item.book.bookId)" class="btn btn-outline-primary btn-sm">-</div>
+                                <div @click="cartAddClicked(item.book.bookId)" class="btn btn-outline-primary btn-sm">+</div>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
                 </div>
                 <div id="orderPage" v-if="orderPage">
                     <h1>订单页面</h1>
@@ -161,6 +215,7 @@
     const vm = new Vue({
         el: '#app',
         data: {
+            //书籍查询页面
             name:'',
             isbn:'',
             author:'',
@@ -173,18 +228,27 @@
             cart:[],
             subOrderList:[],
 
+            //购物车页面
+            address:'',
+            deliveryTime:'',
+            receiverName:'',
+            tel:'',
+
+
             tips:'',//提示信息
             toastShow:false,
+            //页面跳转
             bookSearchPage:true,
             cartPage:false,
             orderPage:false,
             subOrderPage:false,
 
-            username:""
+            user:{'userId':1,'username':'333',userType:1}
 
         },
         methods:{
 
+            //请求
             selectAllBook()//发送请求，请求全部书籍
             {
                 axios.post("http://localhost:8080/hello/book/pub/book/selectAll").then((response)=>{
@@ -205,7 +269,7 @@
                     if (result.msg==='success')
                     {
                         //成功
-                        this.subOrder=result.data;
+                        this.subOrderList=result.data;
                     }else {
                         //失败
                         this.toast('加入购物车失败');
@@ -254,19 +318,20 @@
             },
 
 
+            //页面跳转
             bookSearchPageClicked()
             {
                 this.bookSearchPage=true
                 this.cartPage=false
                 this.orderPage=false
-                this.toast("bookSearchPageClicked")
+                this.selectBookAnd()
             },
             cartPageClicked()
             {
                 this.bookSearchPage=false
                 this.cartPage=true
                 this.orderPage=false
-                this.toast("cartPageClicked")
+                this.selectSubOrder()
             },
             orderPageClicked()
             {
@@ -277,7 +342,7 @@
 
 
 
-
+            //书籍搜索页面
             searchClicked()//点击搜索
             {
                 this.toast('搜索')
@@ -297,8 +362,32 @@
                     this.cart.push({'bookId':bookId,'num':1})
                     this.addToCartSendAxios(bookId,1)
                 }
-                this.toast(this.subOrder)
+                this.toast(this.cart)
             },
+
+            //购物车页面
+            cartAddClicked(bookId)
+            {
+                this.addToCartClicked(bookId);//加1
+                this.selectSubOrder();//刷新页面
+            },
+            cartMinusClicked(bookId)
+            {
+                const index = this.cart.findIndex(function (item, i, arr) {
+                    return item.bookId === bookId
+                })
+                if (index!==-1)//已经有了
+                {
+                    this.cart[index].num-=1
+                    this.addToCartSendAxios(bookId,this.cart[index].num)
+                    if (this.cart[index].num<=0)
+                    {
+                        this.cart.splice(index,1)
+                    }
+                }
+                this.toast(this.cart)
+            },
+
             toast(msg)
             {
                 this.toastShow=true;
