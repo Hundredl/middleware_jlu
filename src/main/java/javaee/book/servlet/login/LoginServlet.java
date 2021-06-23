@@ -31,7 +31,6 @@ public class LoginServlet extends HttpServlet {
             BookUser bookUser=userService.selectByUserName(userName);
             BookUserResp bookUserResp=new BookUserResp();
             BeanUtils.copyProperties(bookUserResp,bookUser);
-            req.getSession().setAttribute("user",bookUserResp);
             ServletUtils.returnResp(resp, GlobalVar.RespMsg.success,bookUserResp);
         }
         else {
