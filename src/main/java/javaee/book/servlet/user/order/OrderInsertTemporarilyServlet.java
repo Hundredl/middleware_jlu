@@ -61,7 +61,9 @@ public class OrderInsertTemporarilyServlet extends HttpServlet {
             case "save":
                 save(req, resp);
                 break;
-            default:
+            case "select":
+                save(req,resp);
+                default:
                 ServletUtils.returnResp(resp, GlobalVar.RespMsg.failure,null);
         }
 
@@ -103,6 +105,10 @@ public class OrderInsertTemporarilyServlet extends HttpServlet {
             //返回
             ServletUtils.returnResp(resp, GlobalVar.RespMsg.success, OrderUtils.getBookSubOrderWithBookList(orderStatefulService.getSubOrderList()));
         }
+    }
+    public void select(HttpServletRequest req, HttpServletResponse resp) throws InvocationTargetException, IllegalAccessException, IOException {
+        //返回全部的购物车信息
+        ServletUtils.returnResp(resp, GlobalVar.RespMsg.success,OrderUtils.getBookSubOrderWithBookList(orderStatefulService.getSubOrderList()));
     }
     public void print(String message){
         Context context;

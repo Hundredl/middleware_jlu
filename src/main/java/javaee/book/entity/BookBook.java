@@ -44,7 +44,7 @@ public class BookBook implements Serializable {
      */
     @Temporal(TemporalType.DATE)
     //@JSONField(format="yyyy-MM-dd HH:mm:ss.SSS")
-    @JSONField(format="yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-ddTHH:mm:ss")
     private Date publishTime;
 
     /**
