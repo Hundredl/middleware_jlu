@@ -106,7 +106,7 @@
                         window.sessionStorage.setItem("user",JSON.stringify(response.data.data))
                         this.toast("登录成功")
                         //跳转页面
-                        let user=window.sessionStorage.getItem("user")
+                        let user=JSON.parse(window.sessionStorage.getItem("user"))
                         if (user.userType===0)
                         {
                             location.href="http://localhost:8080/hello/book/pages/admin/book";

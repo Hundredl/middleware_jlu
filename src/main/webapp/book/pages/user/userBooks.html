@@ -47,9 +47,8 @@
                                            data-bs-toggle="dropdown" aria-expanded="false">{{user.userName}}
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <li><a class="dropdown-item" href="#">登出</a></li>
-                                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                            <li><a class="dropdown-item" href="#" @click="logout">user登出</a></li>
+                                            <li><a class="dropdown-item" href="#">more</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -326,7 +325,12 @@
 
         },
         methods:{
-
+            //登出
+            logout()
+            {
+                window.sessionStorage.setItem("user","")
+                location.href = "http://localhost:8080/hello/book/pages/login"
+            },
             //请求
             selectAllBook()//发送请求，请求全部书籍
             {
@@ -497,9 +501,6 @@
             },
             buyClicked()//点击下单
             {
-                console.log(this.user)
-                console.log(typeof (this.user))
-                console.log(this.user.userId)
                 if (this.cart.length===0)//没有商品直接返回
                 {
                     return;
