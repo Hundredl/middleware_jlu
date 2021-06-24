@@ -454,7 +454,6 @@
             //书籍搜索页面
             searchClicked()//点击搜索
             {
-                this.toast('搜索')
                 this.selectBookAnd();
             },
             addToCartClicked(bookId)//点击加入购物车
@@ -498,6 +497,9 @@
             },
             buyClicked()//点击下单
             {
+                console.log(this.user)
+                console.log(typeof (this.user))
+                console.log(this.user.userId)
                 if (this.cart.length===0)//没有商品直接返回
                 {
                     return;
@@ -555,6 +557,7 @@
         mounted()
         {
             this.selectAllBook()
+            this.user=JSON.parse(window.sessionStorage.getItem("user"))
         }
     })
 </script>

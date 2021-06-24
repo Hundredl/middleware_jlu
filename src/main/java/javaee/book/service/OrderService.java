@@ -21,10 +21,14 @@ public class OrderService {
         cal.setTime(date);
         cal.add(Calendar.HOUR, 8);// 24小时制 , 加8小时
         date = cal.getTime();
-        String filename = sdf.format(date);//String.valueOf(date);
+        String filename = "order "+sdf.format(date);//String.valueOf(date);
         FileWriter writer;
         try {
             File file = new File(path+filename);
+            if (!file.getParentFile().exists())
+            {
+                file.getParentFile().mkdir();
+            }
             if (!file.exists())
             {
                 if (!file.createNewFile())//如果没有创建成功就return

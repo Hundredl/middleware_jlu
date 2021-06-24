@@ -97,7 +97,6 @@
         methods:{
             loginClicked()
             {
-                this.toast("执行登录")
                 let data = {'userName':this.username,'password':this.password}
                 axios.post("http://localhost:8080/hello/book/login",data).then((response)=>{
                     let result = response.data;
@@ -110,9 +109,9 @@
                         let user=window.sessionStorage.getItem("user")
                         if (user.userType===0)
                         {
-                            this.toast("管理员")
+                            location.href="http://localhost:8080/hello/book/pages/admin/book";
                         }else {
-                            this.toast("普通员工")
+                            location.href="http://localhost:8080/hello/book/pages/user/book";
                         }
                     }
                     else {
@@ -126,7 +125,6 @@
             },
             signClicked()
             {
-                this.toast("执行注册")
                 if(this.passwordSign!==this.password2Sign){
                     this.toast("两次输入密码不一致")
                     return;
