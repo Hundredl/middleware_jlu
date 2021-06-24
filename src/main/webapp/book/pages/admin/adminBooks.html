@@ -128,7 +128,7 @@
                             <td>{{item.price}}</td>
                             <td>{{item.count}}</td>
 
-                            <td><div @click="orderPageClicked(item.bookId)" class="btn btn-outline-primary btn-sm">查看订单</div></td>
+                            <td><div @click="selectOrderByBookId(item.bookId)" class="btn btn-outline-primary btn-sm">查看订单</div></td>
                         </tr>
 
                         </tbody>
@@ -425,10 +425,11 @@
                     this.toast("未知错误")
                 })
             },
-            selectOrderByBookId()//发送请求查询订单
+            selectOrderByBookId(bookId)//发送请求查询订单
             {
+                this.orderPageClicked()
                 let data={
-                    'bookId':this.user.userId
+                    'bookId':bookId
                 }
                 axios.post("http://localhost:8080/hello/book/admin/order/selectByBookId",data).then((response)=>{
                     let result= response.data
@@ -436,7 +437,6 @@
                     {
                         //请求成功
                         this.orderList=result.data;
-                        console.log(this.orderList)
                     }
                     else {
                         //请求失败
@@ -484,7 +484,7 @@
             },
             orderPageClicked()
             {
-                this.selectOrderByBookId()//查询图书
+                //this.selectOrderByBookId()//查询图书
                 this.bookSearchPage=false
                 this.addBookPage=false
                 this.orderPage=true
