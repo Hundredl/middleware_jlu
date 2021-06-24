@@ -165,7 +165,7 @@
                     <div class="row row-cols-6 my-4">
                         <div class="">
                             <label for="bookPublishTime">出版时间</label>
-                            <input type="datetime-local" class="form-control" id="bookPublishTime" placeholder="bookPublishTime" v-model="bookPublishTime">
+                            <input type="date" class="form-control" id="bookPublishTime" placeholder="bookPublishTime" v-model="bookPublishTime">
                         </div>
                     </div>
                     <div class="row">
@@ -325,7 +325,7 @@
             bookPrice:'',
             bookCount:'',
             bookIsbnTip:' ',//验证Isbn的提示
-            bookIsbnIsCorrect:'',
+            bookIsbnIsCorrect:false,
 
 
 
@@ -513,6 +513,11 @@
             //添加图书页面
             bookAddClicked()
             {
+                if(!this.bookIsbnIsCorrect)
+                {
+                    this.toast("请输入正确的ISBN")
+                    return
+                }
                 let data={
                     'book':{
                         'bookId':this.bookSaved.length+1,
