@@ -37,7 +37,7 @@ public class BookBookResp {
      */
     @Temporal(TemporalType.DATE)
     //@JSONField(format="yyyy-MM-dd HH:mm:ss.SSS")
-    @JSONField(format="yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd")
     private Date publishTime;
 
     /**

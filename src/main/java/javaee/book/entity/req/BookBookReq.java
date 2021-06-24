@@ -31,13 +31,13 @@ public class BookBookReq {
      * 出版时间开始
      */
     @Temporal(TemporalType.DATE)
-    @JSONField(format="yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd")
     private Date publishTimeBegin;
     /**
      * 出版时间结尾
      */
     @Temporal(TemporalType.DATE)
-    @JSONField(format="yyyy-MM-dd HH:mm:ss")
+    @JSONField(format="yyyy-MM-dd")
     private Date publishTimeEnd;
 
     /**

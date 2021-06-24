@@ -83,19 +83,22 @@
                             <input type="number" class="form-control" id="priceHigh" placeholder="priceHigh" v-model="priceHigh">
                         </div>
                     </div>
-                    <div class="row row-cols-2 my-4">
+                    <div class="row row-cols-4 my-4">
                         <div class="">
                             <label for="publishTimeBegin">最早出版时间</label>
-                            <input type="datetime-local" class="form-control" id="publishTimeBegin" placeholder="publishTimeBegin" v-model="publishTimeBegin">
+                            <input type="date" class="form-control" id="publishTimeBegin" placeholder="publishTimeBegin" v-model="publishTimeBegin">
                         </div>
                         <div class="">
                             <label for="publishTimeEnd">最晚出版时间</label>
-                            <input type="datetime-local" class="form-control" id="publishTimeEnd" placeholder="publishTimeEnd" v-model="publishTimeEnd">
+                            <input type="date" class="form-control" id="publishTimeEnd" placeholder="publishTimeEnd" v-model="publishTimeEnd">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <input type="button" class="btn btn-primary mb-3" value="搜索 " @click="searchClicked">
+                    <div class="row row-cols-auto">
+                        <div class="col">
+                            <input type="button" class="btn btn-outline-primary mb-3 " value="搜索" @click="searchClicked">
+                        </div>
+                        <div class="col">
+                            <input type="button" class="btn btn-outline-primary mb-3" value="清空" @click="searchResetClicked">
                         </div>
                     </div>
                     <table class="table table-hover">
@@ -139,7 +142,8 @@
                         </div>
                         <div class="">
                             <label for="bookIsbn">书号</label>
-                            <input class="form-control" id="bookIsbn" placeholder="ISBN" v-model="bookIsbn">
+                            <input class="form-control" id="bookIsbn" placeholder="ISBN" v-model="bookIsbn" @change="bookIsbnVerify">
+                            <small class="success">{{bookIsbnTip}}</small>
                         </div>
                         <div class="">
                             <label for="bookAuthor">作者</label>
@@ -158,7 +162,7 @@
                             <input type="number" class="form-control" id="bookCount" placeholder="bookCount" v-model="bookCount">
                         </div>
                     </div>
-                    <div class="row row-cols-2 my-4">
+                    <div class="row row-cols-6 my-4">
                         <div class="">
                             <label for="bookPublishTime">出版时间</label>
                             <input type="datetime-local" class="form-control" id="bookPublishTime" placeholder="bookPublishTime" v-model="bookPublishTime">
@@ -320,6 +324,8 @@
             bookPublishTime:'',
             bookPrice:'',
             bookCount:'',
+            bookIsbnTip:' ',//验证Isbn的提示
+            bookIsbnIsCorrect:'',
 
 
 
@@ -492,11 +498,21 @@
                 this.toast('搜索')
                 this.selectBookAnd();
             },
+            searchResetClicked()//搜索条件置为空
+            {
+                this.name=''
+                this.isbn=''
+                this.author=''
+                this.category=''
+                this.publishTimeBegin=''
+                this.publishTimeEnd=''
+                this.priceLow =''
+                this.priceHigh=''
+            },
 
             //添加图书页面
             bookAddClicked()
             {
-                this.toast("bookAddClicked")
                 let data={
                     'book':{
                         'bookId':this.bookSaved.length+1,
@@ -543,7 +559,6 @@
             },
             bookDeleteClicked(bookId)//删除书籍
             {
-                this.toast("bookDeleteClicked")
                 const index = this.bookSaved.findIndex(function (item, i, arr) {
                     return item.bookId === bookId
                 })
@@ -566,6 +581,33 @@
                 else {//还没有，加入
                     this.toast("订单不存在")
                 }
+            },
+            bookIsbnVerify()//isbn的验证
+            {
+                if(this.bookIsbn==='')
+                {
+                    this.bookIsbnTip=' '
+                }
+                let data={'isbnRaw':this.bookIsbn}
+                axios.post("http://localhost:8080/hello/book/admin/book/isbnVerify",data).then((response)=>
+                {
+                    let result = response.data
+                    if (result.msg==='success')
+                    {
+                        //验证成功
+                        if (result.data.isbn==='wrong')
+                        {
+                            this.bookIsbnIsCorrect=false
+                            this.bookIsbnTip='ISBN校验错误'
+                        }
+                        else {
+                            this.bookIsbnTip=result.data.isbn;
+                            this.bookIsbnIsCorrect=true
+                        }
+                    }else {
+                        this.toast('验证失败')
+                    }
+                })
             },
 
             //订单页面
