@@ -44,10 +44,10 @@
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="usernameMenuLink" role="button"
-                                           data-bs-toggle="dropdown" aria-expanded="false">{{user.userName}}
+                                           data-bs-toggle="dropdown" aria-expanded="false">管理员:{{user.userName}}
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <li><a class="dropdown-item" href="#">登出</a></li>
+                                            <li><a class="dropdown-item" href="#" @click="logout">登出</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -170,7 +170,7 @@
                     </div>
                     <div class="row">
                         <div class="col-2">
-                            <input type="button" class="btn btn-primary mb-3" value="添加" @click="bookAddClicked">
+                            <input type="button" class="btn btn-primary mb-3 btn-sm " value="添加" @click="bookAddClicked">
                             <input type="button" class="btn btn-outline-primary mb-3 btn-sm" value="保存" @click="bookSaveClicked">
                         </div>
                     </div>
@@ -349,6 +349,13 @@
         },
         methods:{
 
+            //登出
+            logout()
+            {
+                window.sessionStorage.setItem("user","")
+                location.href = "http://localhost:8080/hello/book/pages/login"
+            },
+
             //请求
             selectAllBook()//发送请求，请求全部书籍
             {
@@ -449,7 +456,6 @@
                     {
                         //成功
                         this.bookSaved = result.data
-                        this.toast("书籍添加成功")
                         console.log(this.bookSaved)
                     }
                 },(err)=>{
@@ -468,11 +474,11 @@
             },
             addBookPageClicked()
             {
+                this.selectBookAddTemp()
                 this.bookSearchPage=false
                 this.addBookPage=true
                 this.orderPage=false
                 this.orderDetailPage=false
-                this.selectSubOrder()
             },
             orderPageClicked()
             {
