@@ -83,7 +83,7 @@
                             <input type="number" class="form-control" id="priceHigh" placeholder="priceHigh" v-model="priceHigh">
                         </div>
                     </div>
-                    <div class="row row-cols-4 my-4">
+                    <div class="row row-cols-6 my-4">
                         <div class="">
                             <label for="publishTimeBegin">最早出版时间</label>
                             <input type="date" class="form-control" id="publishTimeBegin" placeholder="publishTimeBegin" v-model="publishTimeBegin">
@@ -484,7 +484,7 @@
             },
             orderDetailPageClicked()
             {
-                this.selectBookAddTemp()
+                this.selectSubOrder()
                 this.bookSearchPage=false
                 this.addBookPage=false
                 this.orderPage=false
@@ -495,7 +495,6 @@
             //书籍搜索页面
             searchClicked()//点击搜索
             {
-                this.toast('搜索')
                 this.selectBookAnd();
             },
             searchResetClicked()//搜索条件置为空

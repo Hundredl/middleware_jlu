@@ -68,7 +68,7 @@ public class BookDao {
             {
                 continue;
             }
-            if (bookBookReq.getAuthor()!=null&&resultBook.getAuthor()!=null&&bookBookReq.getAuthor().contains(resultBook.getAuthor()))
+            if (bookBookReq.getAuthor()!=null&&resultBook.getAuthor()!=null&&!resultBook.getAuthor().contains(bookBookReq.getAuthor()))
             {
                 continue;
             }
