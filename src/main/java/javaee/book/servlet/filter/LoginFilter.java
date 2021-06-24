@@ -1,5 +1,7 @@
 package javaee.book.servlet.filter;
 
+import javaee.book.entity.resp.BookUserResp;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
@@ -12,9 +14,10 @@ import java.io.IOException;
  */
 @WebFilter(
         filterName = "loginFilter",
-        urlPatterns = "/bookssss/*",
+        urlPatterns = "/bookghjkl/*",
         initParams = {
-                @WebInitParam(name = "loginUrl", value = "/book/login"),
+                @WebInitParam(name = "loginPageUrl", value = "/book/pages/login"),
+                @WebInitParam(name = "loginUrl" ,value = "/book/login"),
                 @WebInitParam(name = "encoding", value = "utf-8")})
 public class LoginFilter implements Filter {
     private FilterConfig config;
@@ -23,6 +26,7 @@ public class LoginFilter implements Filter {
         //获取配置参数
         String loginUrl=config.getInitParameter("loginUrl");
         String encoding = config.getInitParameter("encoding");
+        String loginPageUrl= config.getInitParameter("loginPageUrl");
         //获取请求
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
@@ -30,15 +34,15 @@ public class LoginFilter implements Filter {
         request.setCharacterEncoding(encoding);
         //获取不带http://:端口的地址
         String uri = req.getRequestURI();
-        if (uri.contains(loginUrl))
+        if (uri.contains(loginUrl)||uri.contains(loginPageUrl))
         {
             chain.doFilter(req,resp);
         }else
         {
-            String user=(String) req.getSession().getAttribute("user");
+            BookUserResp user= (BookUserResp) req.getSession().getAttribute("user");
             if(user==null)
             {
-                req.getRequestDispatcher("/book/pages/tips/toLogin.html").forward(req,resp);
+                req.getRequestDispatcher("/book/pages/login/login.html").forward(req,resp);
             }
             else {
                 chain.doFilter(req,resp);

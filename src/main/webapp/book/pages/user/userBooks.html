@@ -559,6 +559,10 @@
         {
             this.selectAllBook()
             this.user=JSON.parse(window.sessionStorage.getItem("user"))
+            if (this.user==null)
+            {
+                location.href="http://localhost:8080/hello/book/pages/login"
+            }
         }
     })
 </script>

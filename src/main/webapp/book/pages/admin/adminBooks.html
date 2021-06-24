@@ -48,6 +48,8 @@
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                             <li><a class="dropdown-item" href="#" @click="logout">登出</a></li>
+                                            <li><a class="dropdown-item" href="#">more</a></li>
+
                                         </ul>
                                     </li>
                                 </ul>
@@ -649,6 +651,10 @@
         {
             this.selectAllBook()
             this.user=JSON.parse(window.sessionStorage.getItem("user"))
+            if (this.user==null)
+            {
+                location.href="http://localhost:8080/hello/book/pages/login"
+            }
         }
     })
 </script>
