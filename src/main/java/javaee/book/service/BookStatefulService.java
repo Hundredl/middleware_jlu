@@ -13,6 +13,23 @@ import java.util.*;
 public class BookStatefulService{
     BookDao bookDao=new BookDao();
     Set<BookBook> ejbBookSet=new HashSet<>();
+    public void insertTemporarilyDelete(Integer bookId)
+    {
+        BookBook bookToDelete=null;
+        for (BookBook book:ejbBookSet)
+        {
+            if (bookId.equals(book.getBookId()))
+            {
+                bookToDelete=book;
+                break;
+            }
+        }
+        ejbBookSet.remove(bookToDelete);
+    }
+    public void insertTemporarilyOne(BookBook bookBook)
+    {
+        ejbBookSet.add(bookBook);
+    }
     public void insertSaveTemporarily(List<BookBook> bookList)
     {
         ejbBookSet.addAll(bookList);

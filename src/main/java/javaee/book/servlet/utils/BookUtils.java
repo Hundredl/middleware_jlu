@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class BookUtils {
-    public static List<BookBookResp> getBookBookReqList(List<BookBook> bookList) throws InvocationTargetException, IllegalAccessException {
+    public static List<BookBookResp> getBookBookRespList(List<BookBook> bookList) throws InvocationTargetException, IllegalAccessException {
         List<BookBookResp> bookRespList = new LinkedList<>();
         for (BookBook book:bookList)
         {
