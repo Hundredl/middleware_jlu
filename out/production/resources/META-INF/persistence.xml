@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="jpaUnit" transaction-type="JTA">
+        <jta-data-source>java:jboss/datasources/sampleDS</jta-data-source>
+        <class>javaee.jpa.one.entity.Mentor</class>
+        <class>javaee.jpa.two.entity.Teacher</class>
+        <class>javaee.jpa.two.entity.Course</class>
+        <class>javaee.jpa3.one2many.entity.OneToManyTeacher</class>
+        <class>javaee.jpa3.one2many.entity.OneToManyCourse</class>
+        <class>javaee.jpa3.many2many.entity.ManyToManyTeacher</class>
+        <class>javaee.jpa3.many2many.entity.ManyToManyCourse</class>
+
+        <class>javaee.book.entity.BookUser</class>
+        <class>javaee.book.entity.BookBook</class>
+    </persistence-unit>
+</persistence>
