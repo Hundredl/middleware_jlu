@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+/**
+ * 页面跳转使用到的servlet，跳转到用户界面
+ */
 @WebServlet(name = "UserBookServlet" , value = "/book/pages/user/book")
 public class UserBookServlet extends HttpServlet {
     @Override

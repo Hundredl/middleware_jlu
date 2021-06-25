@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 登录拦截，不登陆的用户不能访问界面
+ * 登录拦截，不登陆的用户不能访问界面。
+ * 实际并没有使用这个类
  */
 @WebFilter(
         filterName = "loginFilter",

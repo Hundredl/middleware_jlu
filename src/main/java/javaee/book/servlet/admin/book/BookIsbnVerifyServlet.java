@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * 用于图书isbn验证的servlet
+ */
 @WebServlet(name = "BookIsbnVerifyServlet" , value = "/book/admin/book/isbnVerify")
 public class BookIsbnVerifyServlet extends HttpServlet {
     @EJB

@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+/**
+ * 页面跳转使用到的servlet，跳转到登录界面
+ */
 @WebServlet(name = "LoginPageServlet" , value = "/book/pages/login")
 public class LoginPageServlet extends HttpServlet {
     @Override

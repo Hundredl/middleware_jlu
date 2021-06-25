@@ -30,6 +30,9 @@ import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 用户插入订单使用到的servlet
+ */
 @WebServlet(name = "OrderInsertTemporarilyServlet" , value = "/book/user/order/insertTemp")
 public class OrderInsertTemporarilyServlet extends HttpServlet {
     private static final String DEFAULT_MESSAGE = "Welcome to JMS!";

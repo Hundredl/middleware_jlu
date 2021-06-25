@@ -23,6 +23,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 添加书籍的servlet。不同的功能通过`option`参数实现。body中传入
+ */
 @WebServlet(name = "BookInsertTemporarilyServlet" , value = "/book/admin/book/insertTemporarily")
 public class BookInsertTemporarilyServlet extends HttpServlet {
     @EJB

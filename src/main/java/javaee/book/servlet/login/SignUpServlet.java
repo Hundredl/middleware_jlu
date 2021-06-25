@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * 注册使用到的servlet
+ */
 @WebServlet(name = "SignUpServlet" , value = "/book/signup")
 public class SignUpServlet extends HttpServlet {
     UserService userService=new UserService();

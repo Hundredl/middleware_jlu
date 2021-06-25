@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 管理员通过bookId查找订单的servlet
+ */
 @WebServlet(name = "OrderSelectByBookServlet" , value = "/book/admin/order/selectByBookId")
 public class OrderSelectByBookServlet extends HttpServlet {
     @EJB

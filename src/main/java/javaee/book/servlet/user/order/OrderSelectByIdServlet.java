@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 用户查询订单使用到的servlet
+ */
 @WebServlet(name = "OrderSelectByIdServlet" , value = "/book/user/order/selectById")
 public class OrderSelectByIdServlet extends HttpServlet {
     @EJB

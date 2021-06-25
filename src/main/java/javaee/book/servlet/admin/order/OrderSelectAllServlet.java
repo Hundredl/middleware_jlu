@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 管理员查找全部订单的servlet
+ */
 @WebServlet(name = "OrderSelectAllServlet" , value = "/book/admin/order/selectAll")
 public class OrderSelectAllServlet extends HttpServlet {
     @EJB

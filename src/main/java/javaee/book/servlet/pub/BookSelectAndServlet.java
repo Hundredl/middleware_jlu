@@ -19,6 +19,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 书籍查询使用到的servlet
+ */
 @WebServlet(name = "BookSelectAndServlet" , value = "/book/pub/book/selectAnd")
 public class BookSelectAndServlet extends HttpServlet {
     @EJB

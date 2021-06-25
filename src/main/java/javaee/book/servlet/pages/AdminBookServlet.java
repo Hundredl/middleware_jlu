@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 页面跳转使用到的servlet，跳转到管理员界面
+ */
 @WebServlet(name = "AdminBookServlet" , value = "/book/pages/admin/book")
 public class AdminBookServlet extends HttpServlet {
     @Override

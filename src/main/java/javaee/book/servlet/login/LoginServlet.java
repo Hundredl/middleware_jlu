@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
+/**
+ * 登录使用到的servlet
+ */
 @WebServlet(name = "LoginServlet" , value = "/book/login")
 public class LoginServlet extends HttpServlet {
     UserService userService=new UserService();

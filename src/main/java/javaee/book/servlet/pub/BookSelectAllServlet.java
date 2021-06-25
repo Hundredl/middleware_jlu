@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * 书籍查询使用到的servlet
+ */
 @WebServlet(name = "BookSearchServlet" , value = "/book/pub/book/selectAll")
 public class BookSelectAllServlet extends HttpServlet {
     @EJB
