@@ -1,4 +1,19 @@
 # GoBooks系统
+## 文件目录
+项目实现在`javaee.book`文件夹下
++ `dao`利用JPA查询数据库
++ `entity`实体类
+    + `req` 浏览器请求时用到的结构
+    + `resp` 返回参数时用到的结构
++ `mdb` 消息驱动bean
+    + `PubSubMDB`用于接收消息的bean
++ `service`服务层，具体实现逻辑，利用会话bean
++ `servlet`接收浏览器的用户请求
++ `utils`工具类
+
+
+---
+以下是开发时的过程
 ## 待办事项
 - [x] 前端加油
 
